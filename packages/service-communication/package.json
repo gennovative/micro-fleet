@@ -1,0 +1,67 @@
+{
+  "name": "@micro-fleet/service-communication",
+  "version": "0.2.2",
+  "description": "Provides methods for microservices to communicate with each other.",
+  "dependencies": {
+    "amqplib": "~0.5",
+    "body-parser": "~1.17",
+    "express": "~4.15",
+    "lodash": "~4.17",
+    "request": "~2.83",
+    "request-promise": "~4.2",
+    "shortid": "~2.2"
+  },
+  "peerDependencies": {
+    "@micro-fleet/common-contracts": "~1.2",
+    "@micro-fleet/common-util": "~1.2"
+  },
+  "devDependencies": {
+    "@types/amqplib": "~0.5",
+    "@types/chai": "~4.0",
+    "@types/chai-spies": "0.0.0",
+    "@types/express": "~4.0",
+    "@types/lodash": "~4.14",
+    "@types/mocha": "~2.2",
+    "@types/node": "~8.10",
+    "@types/request-promise": "~4.1",
+    "automapper-ts": "~1.8",
+    "chai": "~4.1",
+    "chai-spies": "git://github.com/chaijs/chai-spies.git#b11aeebf",
+    "del": "~3.0",
+    "dts-generator": "~2.1",
+    "gulp": "~3.9",
+    "gulp-cached": "~1.1",
+    "gulp-debug": "~3.1",
+    "gulp-header": "~1.8",
+    "gulp-istanbul": "~1.1",
+    "gulp-mocha": "~3.0",
+    "gulp-replace": "~0.6",
+    "gulp-sourcemaps": "~2.6",
+    "gulp-tslint": "~8.1",
+    "gulp-typescript": "~3.2",
+    "gulp-watch": "~4.3",
+    "gulp-watch-sequence": "~1.0",
+    "istanbul": "~0.4",
+    "merge-stream": "~1.0",
+    "mocha": "~3.4",
+    "remap-istanbul": "~0.9",
+    "through2": "~2.0",
+    "tslint": "~5.9",
+    "typescript": "~2.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "gennovative",
+    "url": "https://github.com/gennovative"
+  },
+  "engines": {
+    "node": "^8",
+    "npm": "^5"
+  },
+  "license": "MIT",
+  "private": false,
+  "main": "./dist/app/index.js",
+  "types": "./typings/app.d.ts"
+}

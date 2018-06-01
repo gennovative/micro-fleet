@@ -1,0 +1,10 @@
+.vscode
+coverage
+dist/test
+dist/**/*.map
+src
+.editorconfig
+.gitignore
+gulpfile.js
+tsconfig.json
+tslint.json

@@ -1,0 +1,64 @@
+{
+  "name": "@micro-fleet/persistence",
+  "description": "Provides base repository class and database connector that helps connect to database and map db tables to JS objects (ORM).",
+  "version": "2.0.3-rc.1",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "knex": "^0.13.0",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "objection": "^0.8.5",
+    "pg": "^7.0.2"
+  },
+  "peerDependencies": {
+    "@micro-fleet/common-contracts": "~1.2",
+    "@micro-fleet/service-communication": "~0.2",
+    "@micro-fleet/common-util": "~1.2"
+  },
+  "devDependencies": {
+    "@micro-fleet/id-generator": "=1.0.0-rc.2",
+    "@types/chai": "~4.0",
+    "@types/chai-spies": "0.0.0",
+    "@types/debug": "0.0.30",
+    "@types/knex": "0.0.41",
+    "@types/lodash": "~4.14",
+    "@types/mocha": "~2.2",
+    "@types/node": "~8.10",
+    "chai": "~4.1",
+    "chai-spies": "git://github.com/chaijs/chai-spies.git#b11aeebf",
+    "del": "~3.0",
+    "dts-generator": "~2.1",
+    "gulp": "~3.9",
+    "gulp-cached": "~1.1",
+    "gulp-debug": "~3.1",
+    "gulp-header": "~1.8",
+    "gulp-istanbul": "~1.1",
+    "gulp-mocha": "~3.0",
+    "gulp-replace": "~0.6",
+    "gulp-sourcemaps": "2.6",
+    "gulp-tslint": "~8.1",
+    "gulp-typescript": "~3.2",
+    "gulp-watch": "~4.3",
+    "gulp-watch-sequence": "~1.0",
+    "istanbul": "~0.4",
+    "merge-stream": "~1.0",
+    "mocha": "~3.4",
+    "remap-istanbul": "~0.9",
+    "sqlite3": "^3.1.13",
+    "through2": "~2.0",
+    "tslint": "~5.9",
+    "typescript": "~2.8"
+  },
+  "author": {
+    "name": "gennovative",
+    "url": "https://github.com/gennovative"
+  },
+  "engines": {
+    "node": "^8",
+    "npm": "^5"
+  },
+  "license": "MIT",
+  "private": false,
+  "main": "./dist/app/index.js",
+  "types": "./typings/app.d.ts"
+}
