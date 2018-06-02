@@ -1,3 +1,5 @@
+lerna-debug.log
+*.code-workspace
 **/.vscode
 **/node_modules
 **/*.log

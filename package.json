@@ -2,18 +2,49 @@
   "name": "micro-fleet",
   "version": "1.0.0",
   "description": "A Docker-friendly microservice-ready framework to develop enterprise-grade applications (not quick prototype).",
-  "repository": "git@github.com:gennovative/micro-fleet.git",
-  "author": "rein.chau <rein.chau@firstidea.vn>",
-  "license": "MIT",
-  "private": true,
+  "workspaces": [
+    "packages/common-contracts"
+  ],
+  "scripts": {
+    "clean": "lerna run prepare",
+    "dedup": "lerna run dedup",
+    "tslint": "lerna run tslint",
+    "compile:ts": "lerna run compile:ts",
+    "watch:ts": "lerna run watch:ts",
+    "test": "lerna run test",
+
+
+    "postinstall": "lerna bootstrap && link-parent-bin"
+  },
   "devDependencies": {
+    "@types/chai": "^4.0.10",
+    "@types/chai-spies": "0.0.0",
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^8.10.18",
     "cz-lerna-changelog": "^1.2.1",
-    "lerna": "^2.11.0"
+    "lerna": "^2.11.0",
+    "link-parent-bin": "^0.2.0",
+    "rimraf": "^2.6.2",
+    "chai": "~4.1",
+    "chai-spies": "~0.7",
+    "dts-generator": "~2.1",
+    "istanbul": "~0.4",
+    "mocha": "~3.4",
+    "remap-istanbul": "~0.9",
+    "tslint": "~5.9",
+    "typescript": "~2.8"
   },
   "dependencies": {},
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-lerna-changelog"
     }
-  }
+  },
+  "author": {
+    "name": "gennovative",
+    "url": "https://github.com/gennovative"
+  },
+  "repository": "git@github.com:gennovative/micro-fleet.git",
+  "license": "MIT",
+  "private": true
 }

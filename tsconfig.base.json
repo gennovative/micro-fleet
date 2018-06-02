@@ -1,8 +1,12 @@
 {
+	"include": [ "src", "typings" ],
+	"exclude": [ "typings/app.d.ts", "node_modules", "bower_components" ],
 	"compilerOptions": {
 		"target": "es2016",
 		"module": "commonjs",
 		"moduleResolution": "node",
+		"rootDir": "src",
+		"outDir": "dist",
 
 		"allowSyntheticDefaultImports": true,
 		"emitDecoratorMetadata": true,
@@ -12,7 +16,7 @@
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"sourceMap": false,
+		"sourceMap": true,
 		"removeComments": true,
 		"lib": ["es2016"]
 	}
