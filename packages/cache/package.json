@@ -1,0 +1,49 @@
+{
+  "name": "back-lib-cache-provider",
+  "private": true,
+  "version": "1.1.0",
+  "description": "Contains utility to manage cache.",
+  "main": "./dist/app/index.js",
+  "types": "./typings/app.d.ts",
+  "repository": "git@bitbucket.org:firstinteractive/back-lib-cache-provider.git",
+  "engines": {
+    "node": "~7.10.1",
+    "npm": "~4.6.1"
+  },
+  "dependencies": {
+    "back-lib-common-constants": "git+ssh://git@bitbucket.org:firstinteractive/back-lib-common-constants.git#1.3.0",
+    "back-lib-common-contracts": "git+ssh://git@bitbucket.org/firstinteractive/back-lib-common-contracts.git#1.2.0",
+    "back-lib-common-util": "git+ssh://git@bitbucket.org:firstinteractive/back-lib-common-util.git#1.2.1",
+    "redis-clustr": "~1.5"
+  },
+  "devDependencies": {
+    "@types/chai": "~4.0",
+    "@types/chai-spies": "~0.0.0",
+    "@types/mocha": "~2.2",
+    "@types/node": "~7.0",
+    "@types/redis": "^2.6.0",
+    "chai": "~4.1",
+    "chai-spies": "git://github.com/chaijs/chai-spies.git#b11aeebf",
+    "del": "~3.0",
+    "dts-generator": "~2.1",
+    "gulp": "~3.9",
+    "gulp-cached": "~1.1",
+    "gulp-debug": "~3.1",
+    "gulp-header": "~1.8",
+    "gulp-istanbul": "~1.1",
+    "gulp-mocha": "~3.0",
+    "gulp-replace": "~0.6",
+    "gulp-sourcemaps": "~2.6",
+    "gulp-tslint": "~8.1",
+    "gulp-typescript": "~3.2",
+    "gulp-watch": "~4.3",
+    "gulp-watch-sequence": "~1.0",
+    "istanbul": "~0.4",
+    "merge-stream": "~1.0",
+    "mocha": "~3.4",
+    "remap-istanbul": "~0.9",
+    "through2": "~2.0",
+    "tslint": "~5.5",
+    "typescript": "~2.5"
+  }
+}
