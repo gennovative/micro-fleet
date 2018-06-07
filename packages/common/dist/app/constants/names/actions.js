@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var ActionNames;
+(function (ActionNames) {
+    ActionNames["ASSIGN_TO_GROUP"] = "assignToGroup";
+    ActionNames["CAN_DEPLOY"] = "canDeploy";
+    ActionNames["CREATE"] = "create";
+    ActionNames["COUNT_ALL"] = "countAll";
+    ActionNames["CONFIGURE_PROGRAM"] = "configureProgram";
+    ActionNames["CONFIGURE_PROGRAM_GROUP"] = "configureProgramGroup";
+    ActionNames["DEPLOY"] = "deploy";
+    ActionNames["DELETE_SOFT"] = "deleteSoft";
+    ActionNames["DELETE_HARD"] = "deleteHard";
+    ActionNames["DELETE_HARD_VERSIONS"] = "deleteHardVersions";
+    ActionNames["EXISTS"] = "exists";
+    ActionNames["FIND_BY_PK"] = "findByPk";
+    ActionNames["GET_BY_HOST_ID"] = "getByHostId";
+    ActionNames["GET_BY_PROGRAM_SLUG"] = "getByProgramSlug";
+    ActionNames["GET_BY_PROGRAM_ID"] = "getByProgramId";
+    ActionNames["GET_SETTINGS"] = "getSettings";
+    ActionNames["GET_PROGRAMS"] = "getPrograms";
+    ActionNames["NEXT_BIG_INT"] = "nextBigInt";
+    ActionNames["NEXT_SHORT_ID"] = "nextShortId";
+    ActionNames["NEXT_UUID_V4"] = "nextUuidv4";
+    ActionNames["PAGE"] = "page";
+    ActionNames["PAGE_VERSIONS"] = "pageVersions";
+    ActionNames["PATCH"] = "patch";
+    ActionNames["RECOVER"] = "recover";
+    ActionNames["RESTRICT_QUANTITY"] = "restrictQuantity";
+    ActionNames["SET_AS_MAIN"] = "setAsMain";
+    ActionNames["UPLOAD"] = "upload";
+    ActionNames["UPDATE"] = "update";
+})(ActionNames = exports.ActionNames || (exports.ActionNames = {}));
+//# sourceMappingURL=actions.js.map

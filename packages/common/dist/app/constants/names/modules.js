@@ -1,0 +1,34 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var ModuleNames;
+(function (ModuleNames) {
+    ModuleNames["ACCOUNT"] = "account";
+    ModuleNames["ACCOUNT_CONFIGURATION"] = "accConfig";
+    ModuleNames["AGENCY"] = "agency";
+    ModuleNames["ASSET"] = "asset";
+    ModuleNames["AUDIT"] = "audit";
+    ModuleNames["BRAND"] = "brand";
+    ModuleNames["BIO_PROFILE"] = "bioProfile";
+    ModuleNames["CIVILIAN"] = "civilian";
+    ModuleNames["COUNTRY"] = "country";
+    ModuleNames["DEVICE"] = "device";
+    ModuleNames["DEVICE_GROUP"] = "deviceGroup";
+    ModuleNames["EVENT"] = "event";
+    ModuleNames["HOST"] = "host";
+    ModuleNames["ID_GEN"] = "idGen";
+    ModuleNames["GEO_PROFILE"] = "geoProfile";
+    ModuleNames["GIFT"] = "gift";
+    ModuleNames["LOCATION"] = "location";
+    ModuleNames["PLAYLIST"] = "playlist";
+    ModuleNames["PROFILE"] = "profile";
+    ModuleNames["PROGRAM"] = "program";
+    ModuleNames["PROGRAM_CONFIGURATION"] = "progConfig";
+    ModuleNames["PROGRAM_GROUP"] = "progGroup";
+    ModuleNames["REGION"] = "region";
+    ModuleNames["ROLE"] = "role";
+    ModuleNames["SETTINGS"] = "settings";
+    ModuleNames["SCHEDULE"] = "schedule";
+    ModuleNames["TENANT"] = "tenant";
+    ModuleNames["TENANT_CONFIGURATION"] = "tenantConfig";
+})(ModuleNames = exports.ModuleNames || (exports.ModuleNames = {}));
+//# sourceMappingURL=modules.js.map

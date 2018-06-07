@@ -6,7 +6,7 @@
     }
   },
   "packages": [
-    "packages/common-contracts"
+    "packages/common"
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,
