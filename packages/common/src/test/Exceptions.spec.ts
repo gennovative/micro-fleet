@@ -93,8 +93,7 @@ describe('InvalidArgumentException', () => {
 	
 	it('new instance should work without specified message.', () => {
 		// Arrange
-		const MSG = 'An error occurs',
-			ARG_NAME = 'age';
+		const ARG_NAME = 'age';
 
 		// Act
 		let ex = new app.InvalidArgumentException(ARG_NAME),

@@ -1,8 +1,7 @@
 import * as chai from 'chai';
 import * as spies from 'chai-spies';
-import { Container } from 'inversify';
 
-import { injectable, inject, IDependencyContainer, DependencyContainer,
+import { injectable, IDependencyContainer, DependencyContainer,
 	HandlerContainer, CriticalException } from '../app';
 
 chai.use(spies);
@@ -14,9 +13,9 @@ const NAME = 'gennova',
 	IDENTIFIER = Symbol('abc');
 
 interface IDummy {
-	echoName(name): string;
-	doubleName(name): string;
-	echoAge(age): number;
+	echoName(name: string): string;
+	doubleName(name: string): string;
+	echoAge(age: number): number;
 }
 
 @injectable()
@@ -24,15 +23,15 @@ class Dummy implements IDummy {
 	constructor() {	
 	}
 
-	public echoName(name): string {
+	public echoName(name: string): string {
 		return name;
 	}
 	
-	public doubleName(name): string {
+	public doubleName(name: string): string {
 		return name + name;
 	}
 
-	public echoAge(age): number {
+	public echoAge(age: number): number {
 		return age;
 	}
 }

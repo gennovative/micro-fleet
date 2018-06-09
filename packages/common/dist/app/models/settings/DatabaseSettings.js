@@ -1,102 +1,113 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const database_1 = require("../../constants/setting-keys/database");
+const Maybe_1 = require("../Maybe");
 const SettingItem_1 = require("./SettingItem");
+/**
+ * Represents an array of database settings.
+ */
 class DatabaseSettings extends Array {
-    static fromProvider(provider) {
-        let nConn = provider.get(database_1.DbSettingKeys.DB_NUM_CONN), details = [], d;
-        for (let i = 0; i < nConn; ++i) {
-            d = this.buildConnDetails(i, provider);
-            if (!d) {
-                continue;
-            }
-            details.push(d);
-        }
-        return details.length ? details : null;
-    }
-    static buildConnDetails(connIdx, provider) {
-        let cnnDetail = {
-            clientName: provider.get(database_1.DbSettingKeys.DB_ENGINE + connIdx)
-        }, value;
-        value = provider.get(database_1.DbSettingKeys.DB_FILE + connIdx);
-        if (value) {
-            cnnDetail.filePath = value;
-            return cnnDetail;
-        }
-        value = provider.get(database_1.DbSettingKeys.DB_CONN_STRING + connIdx);
-        if (value) {
-            cnnDetail.connectionString = value;
-            return cnnDetail;
-        }
-        value = provider.get(database_1.DbSettingKeys.DB_HOST + connIdx);
-        if (value) {
-            cnnDetail.host = {
-                address: provider.get(database_1.DbSettingKeys.DB_HOST + connIdx),
-                user: provider.get(database_1.DbSettingKeys.DB_USER + connIdx),
-                password: provider.get(database_1.DbSettingKeys.DB_PASSWORD + connIdx),
-                database: provider.get(database_1.DbSettingKeys.DB_NAME + connIdx),
+    /**
+     * Parses from configuration provider.
+     * @param {IConfigurationProvider} provider.
+     */
+    /*
+    public static fromProvider(provider: IConfigurationProvider): Maybe<DbConnectionDetail> {
+        const clientName = provider.get(S.DB_ENGINE) as Maybe<DbClient>; // Must belong to `DbClient`
+        if (!clientName.hasValue) { return new Maybe; }
+
+        const cnnDetail: DbConnectionDetail = {
+                clientName: clientName.value
             };
-            return cnnDetail;
+        let setting: Maybe<string>;
+
+        // 1st priority: connect to a local file.
+        setting = provider.get(S.DB_FILE) as Maybe<string>;
+        if (setting.hasValue) {
+            cnnDetail.filePath = setting.value;
+            return new Maybe(cnnDetail);
         }
-        return null;
+
+        // 2nd priority: connect with a connection string.
+        setting = provider.get(S.DB_CONN_STRING) as Maybe<string>;
+        if (setting.hasValue) {
+            cnnDetail.connectionString = setting.value;
+            return new Maybe(cnnDetail);
+        }
+
+        // Last priority: connect with host credentials.
+        setting = provider.get(S.DB_NAME) as Maybe<string>;
+        if (setting.hasValue) {
+            cnnDetail.host = {
+                address: provider.get(S.DB_ADDRESS).TryGetValue('localhost') as string,
+                user: provider.get(S.DB_USER).TryGetValue('') as string,
+                password: provider.get(S.DB_PASSWORD).TryGetValue('') as string,
+                database: provider.get(S.DB_NAME).TryGetValue('') as string,
+            };
+            return new Maybe(cnnDetail);
+        }
+        return new Maybe;
     }
-    constructor() {
-        super();
-        this._countSetting = SettingItem_1.SettingItem.translator.whole({
-            name: database_1.DbSettingKeys.DB_NUM_CONN,
-            dataType: SettingItem_1.SettingItemDataType.Number,
-            value: '0'
-        });
-        this.push(this._countSetting);
-    }
-    get total() {
-        return parseInt(this._countSetting.value);
-    }
-    pushConnection(detail) {
-        let newIdx = parseInt(this._countSetting.value);
-        this.push(SettingItem_1.SettingItem.translator.whole({
-            name: database_1.DbSettingKeys.DB_ENGINE + newIdx,
-            dataType: SettingItem_1.SettingItemDataType.String,
-            value: detail.clientName
-        }));
-        if (detail.host) {
-            this.push(SettingItem_1.SettingItem.translator.whole({
-                name: database_1.DbSettingKeys.DB_HOST + newIdx,
+    //*/
+    /**
+     * Parses from connection detail.
+     * @param {DbConnectionDetail} detail Connection detail loaded from JSON data source.
+     */
+    static fromConnectionDetail(detail) {
+        const settings = new DatabaseSettings;
+        if (detail.clientName) {
+            settings.push(SettingItem_1.SettingItem.translator.whole({
+                name: database_1.DbSettingKeys.DB_ENGINE,
                 dataType: SettingItem_1.SettingItemDataType.String,
-                value: detail.host.address
-            }));
-            this.push(SettingItem_1.SettingItem.translator.whole({
-                name: database_1.DbSettingKeys.DB_USER + newIdx,
-                dataType: SettingItem_1.SettingItemDataType.String,
-                value: detail.host.user
-            }));
-            this.push(SettingItem_1.SettingItem.translator.whole({
-                name: database_1.DbSettingKeys.DB_PASSWORD + newIdx,
-                dataType: SettingItem_1.SettingItemDataType.String,
-                value: detail.host.password
-            }));
-            this.push(SettingItem_1.SettingItem.translator.whole({
-                name: database_1.DbSettingKeys.DB_NAME + newIdx,
-                dataType: SettingItem_1.SettingItemDataType.String,
-                value: detail.host.database
+                value: detail.clientName
             }));
         }
-        else if (detail.filePath) {
-            this.push(SettingItem_1.SettingItem.translator.whole({
-                name: database_1.DbSettingKeys.DB_FILE + newIdx,
+        else {
+            return new Maybe_1.Maybe;
+        }
+        if (detail.filePath) {
+            settings.push(SettingItem_1.SettingItem.translator.whole({
+                name: database_1.DbSettingKeys.DB_FILE,
                 dataType: SettingItem_1.SettingItemDataType.String,
                 value: detail.filePath
             }));
         }
-        else {
-            this.push(SettingItem_1.SettingItem.translator.whole({
-                name: database_1.DbSettingKeys.DB_CONN_STRING + newIdx,
+        else if (detail.connectionString) {
+            settings.push(SettingItem_1.SettingItem.translator.whole({
+                name: database_1.DbSettingKeys.DB_CONN_STRING,
                 dataType: SettingItem_1.SettingItemDataType.String,
                 value: detail.connectionString
             }));
         }
-        let setting = this._countSetting;
-        setting.value = (newIdx + 1) + '';
+        else if (detail.host) {
+            settings.push(SettingItem_1.SettingItem.translator.whole({
+                name: database_1.DbSettingKeys.DB_ADDRESS,
+                dataType: SettingItem_1.SettingItemDataType.String,
+                value: detail.host.address
+            }));
+            settings.push(SettingItem_1.SettingItem.translator.whole({
+                name: database_1.DbSettingKeys.DB_USER,
+                dataType: SettingItem_1.SettingItemDataType.String,
+                value: detail.host.user
+            }));
+            settings.push(SettingItem_1.SettingItem.translator.whole({
+                name: database_1.DbSettingKeys.DB_PASSWORD,
+                dataType: SettingItem_1.SettingItemDataType.String,
+                value: detail.host.password
+            }));
+            settings.push(SettingItem_1.SettingItem.translator.whole({
+                name: database_1.DbSettingKeys.DB_NAME,
+                dataType: SettingItem_1.SettingItemDataType.String,
+                value: detail.host.database
+            }));
+        }
+        else {
+            return new Maybe_1.Maybe;
+        }
+        return settings.length ? new Maybe_1.Maybe(settings) : new Maybe_1.Maybe;
+    }
+    constructor() {
+        super();
     }
 }
 exports.DatabaseSettings = DatabaseSettings;

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { Container } from 'inversify';
 
-import { injectable, inject, IDependencyContainer, DependencyContainer } from '../app';
+import { injectable, IDependencyContainer, DependencyContainer } from '../app';
 
 const NAME = 'gennova',
 	IDENTIFIER = Symbol('abc');

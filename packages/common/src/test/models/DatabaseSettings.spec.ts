@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { SettingItemDataType, IConfigurationProvider, DbConnectionDetail,
+import { /*SettingItemDataType, IConfigurationProvider,*/ DbConnectionDetail,
 	DatabaseSettings, Maybe, constants } from '../../app/';
 
 const { DbSettingKeys: S, DbClient } = constants;
@@ -107,7 +107,7 @@ describe('DatabaseSettings', () => {
 			expect(parseResult.hasValue).to.be.true;
 
 			const settings: DatabaseSettings = parseResult.value;
-			expect(settings.length).to.equal(4);
+			expect(settings.length).to.equal(5);
 			expect(settings[0].name).to.equal(S.DB_ENGINE);
 			expect(settings[0].value).to.equal(detail.clientName);
 			expect(settings[1].name).to.equal(S.DB_ADDRESS);

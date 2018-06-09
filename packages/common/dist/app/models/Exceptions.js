@@ -2,16 +2,31 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 Error.stackTraceLimit = 20;
 class Exception {
+    /**
+     *
+     * @param message
+     * @param isCritical
+     * @param exceptionClass {class} The exception class to exclude from stacktrace.
+     */
     constructor(message = '', isCritical = true, exceptionClass) {
         this.message = message;
         this.isCritical = isCritical;
         Error.captureStackTrace(this, exceptionClass || Exception);
     }
     toString() {
+        // Ex 1: [Critical] A big mess has happened!
+        //		 <stacktrace here>
+        //
+        // Ex 2: [Minor]
+        //		 <stacktrace here>
         return `[${(this.isCritical ? 'Critical' : 'Minor')}] ${this.message ? this.message : ''} \n ${this.stack}`;
     }
 }
 exports.Exception = Exception;
+/**
+ * Represents a serious problem that may cause the system in unstable state
+ * and need restarting.
+ */
 class CriticalException extends Exception {
     constructor(message) {
         super(message, true, CriticalException);
@@ -19,6 +34,10 @@ class CriticalException extends Exception {
     }
 }
 exports.CriticalException = CriticalException;
+/**
+ * Represents an acceptable problem that can be handled
+ * and the system does not need restarting.
+ */
 class MinorException extends Exception {
     constructor(message) {
         super(message, false, MinorException);
@@ -26,6 +45,10 @@ class MinorException extends Exception {
     }
 }
 exports.MinorException = MinorException;
+/**
+ * Represents an error where the provided argument of a function or constructor
+ * is not as expected.
+ */
 class InvalidArgumentException extends Exception {
     constructor(argName, message) {
         super(`The argument "${argName}" is invalid! ${(message ? message : '')}`, false, InvalidArgumentException);
@@ -33,6 +56,9 @@ class InvalidArgumentException extends Exception {
     }
 }
 exports.InvalidArgumentException = InvalidArgumentException;
+/**
+ * Represents an error when an unimplemented method is called.
+ */
 class NotImplementedException extends Exception {
     constructor(message) {
         super(message, false, NotImplementedException);
@@ -40,6 +66,9 @@ class NotImplementedException extends Exception {
     }
 }
 exports.NotImplementedException = NotImplementedException;
+/**
+ * Represents an error whose origin is from another system.
+ */
 class InternalErrorException extends Exception {
     constructor(message) {
         super(message || 'An error occured on the 3rd-party side', false, InternalErrorException);

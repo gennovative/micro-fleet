@@ -1,5 +1,6 @@
 lerna-debug.log
 *.code-workspace
+**/.nyc_output
 **/.vscode
 **/node_modules
 **/*.log

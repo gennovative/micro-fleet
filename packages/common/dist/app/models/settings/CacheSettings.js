@@ -1,18 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const cache_1 = require("../../constants/setting-keys/cache");
+// import { Maybe } from '../Maybe';
 const SettingItem_1 = require("./SettingItem");
+/**
+ * Represents an array of cache settings.
+ */
 class CacheSettings extends Array {
-    static fromProvider(provider) {
-        let nConn = provider.get(cache_1.CacheSettingKeys.CACHE_NUM_CONN), details = [];
-        for (let i = 0; i < nConn; ++i) {
-            details.push({
-                host: provider.get(cache_1.CacheSettingKeys.CACHE_HOST + i),
-                port: provider.get(cache_1.CacheSettingKeys.CACHE_PORT + i)
-            });
-        }
-        return details.length ? details : null;
-    }
     constructor() {
         super();
         this._numSetting = SettingItem_1.SettingItem.translator.whole({
@@ -22,10 +16,16 @@ class CacheSettings extends Array {
         });
         this.push(this._numSetting);
     }
+    /**
+     * Gets number of connection settings.
+     */
     get total() {
         return parseInt(this._numSetting.value);
     }
-    pushConnection(detail) {
+    /**
+     * Parses then adds a server detail to setting item array.
+     */
+    pushServer(detail) {
         let newIdx = parseInt(this._numSetting.value);
         this.push(SettingItem_1.SettingItem.translator.whole({
             name: cache_1.CacheSettingKeys.CACHE_HOST + newIdx,

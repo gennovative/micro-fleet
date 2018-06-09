@@ -17,6 +17,7 @@ __export(require("./translators/ModelAutoMapper"));
 __export(require("./validators/JoiModelValidator"));
 __export(require("./validators/ValidationError"));
 __export(require("./DependencyContainer"));
+__export(require("./HandlerContainer"));
 __export(require("./Guard"));
 __export(require("./Types"));
 //# sourceMappingURL=index.js.map

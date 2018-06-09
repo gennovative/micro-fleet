@@ -8,7 +8,7 @@ describe('Guard', () => {
 			// Arrange
 			let arg_1st = 0,
 				arg_2nd = {},
-				arg_3rd = [],
+				arg_3rd = [] as any[],
 				ex_1st, ex_2nd, ex_3rd;
 			
 			// Act
@@ -108,7 +108,7 @@ describe('Guard', () => {
 			let arg_1st = null,
 				arg_2nd = undefined,
 				arg_3rd = {},
-				arg_4th = [],
+				arg_4th = [] as any[],
 				arg_5th = '',
 				arg_6th = 99,
 				arg_7th, ex_1st, ex_2nd, ex_3rd, ex_4th, ex_5th, ex_6th, ex_7th;
@@ -205,7 +205,7 @@ describe('Guard', () => {
 			let arg_1st = null,
 				arg_2nd = undefined,
 				arg_3rd = {},
-				arg_4th = [],
+				arg_4th = [] as any[],
 				arg_5th = '',
 				arg_6th = 99,
 				arg_7th, ex_1st, ex_2nd, ex_3rd, ex_4th, ex_5th, ex_6th, ex_7th;
@@ -329,7 +329,7 @@ describe('Guard', () => {
 			// Arrange
 			let arg_1st = 0,
 				arg_2nd = {},
-				arg_3rd = [],
+				arg_3rd = [] as any[],
 				ex_1st, ex_2nd, ex_3rd;
 			
 			// Act
@@ -429,7 +429,7 @@ describe('Guard', () => {
 			let arg_1st = null,
 				arg_2nd = undefined,
 				arg_3rd = {},
-				arg_4th = [],
+				arg_4th = [] as any[],
 				arg_5th = '',
 				arg_6th = 99,
 				arg_7th, ex_1st, ex_2nd, ex_3rd, ex_4th, ex_5th, ex_6th, ex_7th;
@@ -526,7 +526,7 @@ describe('Guard', () => {
 			let arg_1st = null,
 				arg_2nd = undefined,
 				arg_3rd = {},
-				arg_4th = [],
+				arg_4th = [] as any[],
 				arg_5th = '',
 				arg_6th = 99,
 				arg_7th, ex_1st, ex_2nd, ex_3rd, ex_4th, ex_5th, ex_6th, ex_7th;

@@ -3,7 +3,7 @@
  */
 export class PagedArray<T> extends Array<T> {
 
-	private _total: number;
+	private _total: number = 0;
 
 	/**
 	 * Gets total number of items.
@@ -22,8 +22,8 @@ export class PagedArray<T> extends Array<T> {
 		Object.defineProperty(this, '_total', {
 			enumerable: false,
 			configurable: false,
+			value: total
 		});
-		this._total = total;
 	}
 
 	/**

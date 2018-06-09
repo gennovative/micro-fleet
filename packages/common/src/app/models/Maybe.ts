@@ -24,13 +24,16 @@ export class Maybe<T> {
 	 * @throws {MinorException} If there is no value.
 	 */
 	public get value(): T {
+		if (!this._hasValue) {
+			throw new MinorException('MAYBE_HAS_NO_VALUE');
+		}
 		return this._value;
 	}
 
 	//#endregion Getters & Setters
 
 	constructor(value?: T) {
-		if (typeof value !== 'undefined') { return; }
+		if (!arguments.length) { return; }
 		this._value = value;
 		this._hasValue = true;
 	}

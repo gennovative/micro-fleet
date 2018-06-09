@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Exceptions_1 = require("../models/Exceptions");
+/**
+ * Represents an error when a model does not pass validation.
+ */
 class ValidationError extends Exceptions_1.MinorException {
     constructor(joiDetails) {
         super();
@@ -10,6 +13,7 @@ class ValidationError extends Exceptions_1.MinorException {
     }
     parseDetails(joiDetails) {
         let details = [];
+        /* istanbul ignore next */
         if (!joiDetails || !joiDetails.length) {
             return details;
         }

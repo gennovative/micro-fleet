@@ -4,9 +4,18 @@ const joi = require("joi");
 const ModelAutoMapper_1 = require("../../translators/ModelAutoMapper");
 const JoiModelValidator_1 = require("../../validators/JoiModelValidator");
 const Exceptions_1 = require("../Exceptions");
+/**
+ * Represents the request contract for GetSetting endpoint.
+ */
 class GetSettingRequest {
     constructor() {
+        /**
+         * Gets or sets program slug.
+         */
         this.slug = undefined;
+        /**
+         * Gets or sets IP address where the calling program is running.
+         */
         this.ipAddress = undefined;
     }
 }

@@ -1,49 +1,47 @@
 {
-  "name": "micro-fleet",
-  "version": "1.0.0",
-  "description": "A Docker-friendly microservice-ready framework to develop enterprise-grade applications (not quick prototype).",
-  "workspaces": [
-    "packages/common"
-  ],
-  "scripts": {
-    "clean": "lerna run clearn",
-    "dedup": "lerna run dedup",
-    "tslint": "lerna run tslint",
-    "compile": "lerna run compile:ts",
-    "watch": "lerna run watch:ts",
-    "test": "lerna run test",
-    "postinstall": "link-parent-bin"
-  },
-  "devDependencies": {
-    "@types/chai": "^4.0.10",
-    "@types/chai-spies": "0.0.0",
-    "@types/mocha": "^2.2.48",
-    "@types/node": "^8.10.18",
-    "chai": "~4.1",
-    "chai-spies": "~0.7",
-    "commitizen": "~2.10",
-    "cz-lerna-changelog": "^1.2.1",
-    "dts-generator": "~2.1",
-    "istanbul": "~0.4",
-    "lerna": "^2.11.0",
-    "lerna-semantic-release": "~9.1",
-    "link-parent-bin": "^0.2.0",
-    "mocha": "~3.4",
-    "remap-istanbul": "~0.9",
-    "rimraf": "^2.6.2",
-    "tslint": "~5.9",
-    "typescript": "^2.9.1"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-lerna-changelog"
-    }
-  },
-  "author": {
-    "name": "gennovative",
-    "url": "https://github.com/gennovative"
-  },
-  "repository": "git@github.com:gennovative/micro-fleet.git",
-  "license": "MIT",
-  "private": true
+	"name": "micro-fleet",
+	"version": "1.0.0",
+	"description": "A Docker-friendly microservice-ready framework to develop enterprise-grade applications (not quick prototype).",
+	"workspaces": [
+		"packages/common"
+	],
+	"scripts": {
+		"clean": "lerna run clean",
+		"dedup": "lerna run dedup",
+		"tslint": "lerna run tslint",
+		"compile": "lerna run compile:ts",
+		"watch": "lerna run watch:ts",
+		"test": "lerna run test",
+		"postinstall": "link-parent-bin"
+	},
+	"devDependencies": {
+		"@types/chai": "~4.1",
+		"@types/chai-spies": "~0.0.1",
+		"@types/mocha": "~5.2",
+		"@types/node": "^8.10.18",
+		"chai": "~4.1",
+		"chai-spies": "~1.0",
+		"commitizen": "~2.10",
+		"cz-lerna-changelog": "~1.2",
+		"dts-generator": "~2.1",
+		"lerna-semantic-release": "~9.1",
+		"link-parent-bin": "~0.2",
+		"mocha": "~5.2",
+		"nyc": "~12.0",
+		"rimraf": "~2.6",
+		"tslint": "~5.10",
+		"typescript": "~2.9"
+	},
+	"config": {
+		"commitizen": {
+		"path": "./node_modules/cz-lerna-changelog"
+		}
+	},
+	"author": {
+		"name": "gennovative",
+		"url": "https://github.com/gennovative"
+	},
+	"repository": "git@github.com:gennovative/micro-fleet.git",
+	"license": "MIT",
+	"private": true
 }
