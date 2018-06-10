@@ -1,8 +1,9 @@
 /**
  * This file is for global definitions.
  */
-declare namespace NodeJS {
-	export interface Global {
-        gennova: any;
-    }
-}
+
+/**
+ * Workaround to avoid error when external library
+ * doesn't have type definition.
+ */
+//declare module '*';

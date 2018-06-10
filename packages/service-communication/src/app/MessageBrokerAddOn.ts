@@ -1,5 +1,5 @@
-import { IConfigurationProvider, Types as ConT, constants } from '@micro-fleet/common-contracts';
-import { injectable, inject, Guard } from '@micro-fleet/common-util';
+import { IConfigurationProvider, Types as ConT, constants, injectable,
+	inject, Guard } from '@micro-fleet/common';
 
 import { IMessageBrokerConnector, IConnectionOptions} from './MessageBrokerConnector';
 import { Types as T } from './Types';
@@ -24,13 +24,13 @@ export class MessageBrokerAddOn implements IServiceAddOn {
 	public init(): Promise<void> {
 		let cfgAdt = this._configProvider,
 			opts: IConnectionOptions = {
-				hostAddress: cfgAdt.get(S.MSG_BROKER_HOST),
-				username: cfgAdt.get(S.MSG_BROKER_USERNAME),
-				password: cfgAdt.get(S.MSG_BROKER_PASSWORD),
-				exchange: cfgAdt.get(S.MSG_BROKER_EXCHANGE),
-				queue: cfgAdt.get(S.MSG_BROKER_QUEUE),
-				reconnectDelay: cfgAdt.get(S.MSG_BROKER_RECONN_TIMEOUT),
-				messageExpiredIn: cfgAdt.get(S.MSG_BROKER_RECONN_TIMEOUT),
+				hostAddress: cfgAdt.get(S.MSG_BROKER_HOST).value as string,
+				username: cfgAdt.get(S.MSG_BROKER_USERNAME).value as string,
+				password: cfgAdt.get(S.MSG_BROKER_PASSWORD).value as string,
+				exchange: cfgAdt.get(S.MSG_BROKER_EXCHANGE).value as string,
+				queue: cfgAdt.get(S.MSG_BROKER_QUEUE).value as string,
+				reconnectDelay: cfgAdt.get(S.MSG_BROKER_RECONN_TIMEOUT).value as number,
+				messageExpiredIn: cfgAdt.get(S.MSG_BROKER_RECONN_TIMEOUT).value as number,
 			};
 		return this._msgBrokerCnn.connect(opts);
 	}

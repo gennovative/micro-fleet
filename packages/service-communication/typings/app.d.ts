@@ -1,9 +1,8 @@
 /// <reference path="./global.d.ts" />
-
 declare module '@micro-fleet/service-communication/dist/app/RpcCommon' {
 	/// <reference types="node" />
 	import { EventEmitter } from 'events';
-	import { IDependencyContainer, ActionFactory } from '@micro-fleet/common-util';
+	import { IDependencyContainer, ActionFactory } from '@micro-fleet/common';
 	export interface IRpcRequest {
 	    from: string;
 	    to: string;
@@ -44,7 +43,7 @@ declare module '@micro-fleet/service-communication/dist/app/RpcCommon' {
 	    /**
 	     * Registers a listener to handle errors.
 	     */
-	    onError(handler: (err) => void): void;
+	    onError(handler: (err: any) => void): void;
 	}
 	export type RpcControllerFunction = (requestPayload: any, resolve: PromiseResolveFn, reject: PromiseRejectFn, rawRequest: IRpcRequest) => any;
 	export interface IRpcHandler {
@@ -70,7 +69,7 @@ declare module '@micro-fleet/service-communication/dist/app/RpcCommon' {
 	    /**
 	     * Registers a listener to handle errors.
 	     */
-	    onError(handler: (err) => void): void;
+	    onError(handler: (err: any) => void): void;
 	    /**
 	     * Starts listening to requests.
 	     */
@@ -91,14 +90,14 @@ declare module '@micro-fleet/service-communication/dist/app/RpcCommon' {
 	     * @see IRpcCaller.timeout
 	     */
 	    /**
-	     * @see IRpcCaller.timeout
-	     */
+	    * @see IRpcCaller.timeout
+	    */
 	    timeout: number;
 	    dispose(): Promise<void>;
 	    /**
 	     * @see IRpcCaller.onError
 	     */
-	    onError(handler: (err) => void): void;
+	    onError(handler: (err: any) => void): void;
 	    protected emitError(err: any): void;
 	    protected rebuildError(payload: any): any;
 	}
@@ -117,9 +116,9 @@ declare module '@micro-fleet/service-communication/dist/app/RpcCommon' {
 	    /**
 	     * @see IRpcHandler.onError
 	     */
-	    onError(handler: (err) => void): void;
+	    onError(handler: (err: any) => void): void;
 	    protected emitError(err: any): void;
-	    protected createResponse(isSuccess: any, payload: any, replyTo: string): IRpcResponse;
+	    protected createResponse(isSuccess: boolean, payload: any, replyTo: string): IRpcResponse;
 	    protected createError(rawError: any): any;
 	}
 
@@ -153,9 +152,8 @@ declare module '@micro-fleet/service-communication/dist/app/DirectRpcCaller' {
 
 }
 declare module '@micro-fleet/service-communication/dist/app/DirectRpcHandler' {
-	/// <reference types="express" />
 	import * as express from 'express';
-	import { IDependencyContainer, ActionFactory } from '@micro-fleet/common-util';
+	import { IDependencyContainer, ActionFactory } from '@micro-fleet/common';
 	import * as rpc from '@micro-fleet/service-communication/dist/app/RpcCommon';
 	export interface ExpressRpcHandlerInitOptions {
 	    expressApp: express.Express;
@@ -199,7 +197,7 @@ declare module '@micro-fleet/service-communication/dist/app/DirectRpcHandler' {
 
 }
 declare module '@micro-fleet/service-communication/dist/app/DirectRpcHandlerAddOnBase' {
-	import { IConfigurationProvider } from '@micro-fleet/common-contracts';
+	import { IConfigurationProvider } from '@micro-fleet/common';
 	import { IDirectRpcHandler } from '@micro-fleet/service-communication/dist/app/DirectRpcHandler';
 	/**
 	 * Base class for DirectRpcAddOn.
@@ -357,7 +355,7 @@ declare module '@micro-fleet/service-communication/dist/app/MessageBrokerConnect
 	    /**
 	     * Registers a listener to handle errors.
 	     */
-	    onError(handler: (err) => void): void;
+	    onError(handler: (err: any) => void): void;
 	}
 	export class TopicMessageBrokerConnector implements IMessageBrokerConnector {
 	    	    	    	    	    	    	    	    	    	    	    	    	    	    constructor();
@@ -365,15 +363,15 @@ declare module '@micro-fleet/service-communication/dist/app/MessageBrokerConnect
 	     * @see IMessageBrokerConnector.queue
 	     */
 	    /**
-	     * @see IMessageBrokerConnector.queue
-	     */
+	    * @see IMessageBrokerConnector.queue
+	    */
 	    queue: string;
 	    /**
 	     * @see IMessageBrokerConnector.messageExpiredIn
 	     */
 	    /**
-	     * @see IMessageBrokerConnector.messageExpiredIn
-	     */
+	    * @see IMessageBrokerConnector.messageExpiredIn
+	    */
 	    messageExpiredIn: number;
 	    /**
 	     * @see IMessageBrokerConnector.subscribedPatterns
@@ -422,8 +420,8 @@ declare module '@micro-fleet/service-communication/dist/app/MessageBrokerConnect
 	    /**
 	     * @see IMessageBrokerConnector.onError
 	     */
-	    onError(handler: (err) => void): void;
-	    	    	    	    	    	    	    	    	    	    	    	    	    	    	}
+	    onError(handler: (err: any) => void): void;
+	    	    	    	    	    	    	    	    	    	    	    	    	    	}
 
 }
 declare module '@micro-fleet/service-communication/dist/app/MediateRpcCaller' {
@@ -449,7 +447,7 @@ declare module '@micro-fleet/service-communication/dist/app/MediateRpcCaller' {
 
 }
 declare module '@micro-fleet/service-communication/dist/app/MediateRpcHandler' {
-	import { IDependencyContainer, ActionFactory } from '@micro-fleet/common-util';
+	import { IDependencyContainer, ActionFactory } from '@micro-fleet/common';
 	import { IMessageBrokerConnector } from '@micro-fleet/service-communication/dist/app/MessageBrokerConnector';
 	import * as rpc from '@micro-fleet/service-communication/dist/app/RpcCommon';
 	export interface IMediateRpcHandler extends rpc.IRpcHandler {
@@ -488,7 +486,7 @@ declare module '@micro-fleet/service-communication/dist/app/MediateRpcHandler' {
 
 }
 declare module '@micro-fleet/service-communication/dist/app/MediateRpcHandlerAddOnBase' {
-	import { IConfigurationProvider } from '@micro-fleet/common-contracts';
+	import { IConfigurationProvider } from '@micro-fleet/common';
 	import { IMediateRpcHandler } from '@micro-fleet/service-communication/dist/app/MediateRpcHandler';
 	/**
 	 * Base class for MediateRpcAddOn.
@@ -515,7 +513,7 @@ declare module '@micro-fleet/service-communication/dist/app/MediateRpcHandlerAdd
 
 }
 declare module '@micro-fleet/service-communication/dist/app/MessageBrokerAddOn' {
-	import { IConfigurationProvider } from '@micro-fleet/common-contracts';
+	import { IConfigurationProvider } from '@micro-fleet/common';
 	import { IMessageBrokerConnector } from '@micro-fleet/service-communication/dist/app/MessageBrokerConnector';
 	export class MessageBrokerAddOn implements IServiceAddOn {
 	    	    	    constructor(_configProvider: IConfigurationProvider, _msgBrokerCnn: IMessageBrokerConnector);

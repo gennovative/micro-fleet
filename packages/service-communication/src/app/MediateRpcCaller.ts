@@ -1,7 +1,5 @@
-import { EventEmitter } from 'events';
-
 import * as shortid from 'shortid';
-import { injectable, inject, IDependencyContainer, Guard, MinorException } from '@micro-fleet/common-util';
+import { injectable, inject, Guard, MinorException } from '@micro-fleet/common';
 
 import { Types as T } from './Types';
 import { IMessageBrokerConnector, IMessage } from './MessageBrokerConnector';
@@ -59,7 +57,7 @@ export class MessageBrokerRpcCaller
 
 			conn.subscribe(replyTo)
 				.then(() => {
-					let token;
+					let token: NodeJS.Timer;
 					let onMessage = async (msg: IMessage) => {
 						clearTimeout(token);
 						// We got what we want, stop consuming.

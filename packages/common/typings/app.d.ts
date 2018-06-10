@@ -1,5 +1,5 @@
 /// <reference path="./global.d.ts" />
-declare module 'app/models/Exceptions' {
+declare module '@micro-fleet/common/dist/app/models/Exceptions' {
 	export class Exception implements Error {
 	    readonly message: string;
 	    readonly isCritical: boolean;
@@ -49,7 +49,7 @@ declare module 'app/models/Exceptions' {
 	}
 
 }
-declare module 'app/Guard' {
+declare module '@micro-fleet/common/dist/app/Guard' {
 	export class Guard {
 	    /**
 	     * Makes sure the specified `target` is not null or undefined.
@@ -142,7 +142,7 @@ declare module 'app/Guard' {
 	}
 
 }
-declare module 'app/DependencyContainer' {
+declare module '@micro-fleet/common/dist/app/DependencyContainer' {
 	import { injectable, inject, decorate, interfaces, unmanaged } from 'inversify';
 	export class BindingScope<T> {
 	    	    constructor(_binding: interfaces.BindingInWhenOnSyntax<T>);
@@ -216,8 +216,8 @@ declare module 'app/DependencyContainer' {
 	    	    	}
 
 }
-declare module 'app/HandlerContainer' {
-	import { IDependencyContainer } from 'app/DependencyContainer';
+declare module '@micro-fleet/common/dist/app/HandlerContainer' {
+	import { IDependencyContainer } from '@micro-fleet/common/dist/app/DependencyContainer';
 	export type ActionFactory = (obj: any, action: string) => Function;
 	export type HandlerDetails = {
 	    dependencyIdentifier: string | symbol;
@@ -247,14 +247,14 @@ declare module 'app/HandlerContainer' {
 	    	}
 
 }
-declare module 'app/Types' {
+declare module '@micro-fleet/common/dist/app/Types' {
 	export class Types {
 	    static readonly CONFIG_PROVIDER: string;
 	    static readonly DEPENDENCY_CONTAINER: string;
 	}
 
 }
-declare module 'app/constants/DbClient' {
+declare module '@micro-fleet/common/dist/app/constants/DbClient' {
 	/**
 	 * Db driver names.
 	 */
@@ -278,13 +278,13 @@ declare module 'app/constants/DbClient' {
 	}
 
 }
-declare module 'app/constants/ports' {
+declare module '@micro-fleet/common/dist/app/constants/ports' {
 	export enum ServicePorts {
 	    SETTINGS = 50100
 	}
 
 }
-declare module 'app/constants/names/actions' {
+declare module '@micro-fleet/common/dist/app/constants/names/actions' {
 	export enum ActionNames {
 	    /**
 	     * Assign to group
@@ -401,7 +401,7 @@ declare module 'app/constants/names/actions' {
 	}
 
 }
-declare module 'app/constants/names/modules' {
+declare module '@micro-fleet/common/dist/app/constants/names/modules' {
 	export enum ModuleNames {
 	    /**
 	     * Account
@@ -518,7 +518,7 @@ declare module 'app/constants/names/modules' {
 	}
 
 }
-declare module 'app/constants/setting-keys/cache' {
+declare module '@micro-fleet/common/dist/app/constants/setting-keys/cache' {
 	export enum CacheSettingKeys {
 	    /**
 	     * Number of cache servers in cluster.
@@ -539,7 +539,7 @@ declare module 'app/constants/setting-keys/cache' {
 	}
 
 }
-declare module 'app/constants/setting-keys/database' {
+declare module '@micro-fleet/common/dist/app/constants/setting-keys/database' {
 	export enum DbSettingKeys {
 	    /**
 	     * Name of database engine.
@@ -585,7 +585,7 @@ declare module 'app/constants/setting-keys/database' {
 	}
 
 }
-declare module 'app/constants/setting-keys/message-broker' {
+declare module '@micro-fleet/common/dist/app/constants/setting-keys/message-broker' {
 	export enum MbSettingKeys {
 	    /**
 	     * IP or host name of message broker.
@@ -625,7 +625,7 @@ declare module 'app/constants/setting-keys/message-broker' {
 	}
 
 }
-declare module 'app/constants/setting-keys/rpc' {
+declare module '@micro-fleet/common/dist/app/constants/setting-keys/rpc' {
 	export enum RpcSettingKeys {
 	    /**
 	     * Number of milliseconds after which RPC caller stops waiting for response.
@@ -640,7 +640,7 @@ declare module 'app/constants/setting-keys/rpc' {
 	}
 
 }
-declare module 'app/constants/setting-keys/service' {
+declare module '@micro-fleet/common/dist/app/constants/setting-keys/service' {
 	export enum SvcSettingKeys {
 	    /**
 	     * Number of milliseconds to wait before actually stop addons.
@@ -670,16 +670,16 @@ declare module 'app/constants/setting-keys/service' {
 	}
 
 }
-declare module 'app/constants/index' {
-	import { DbClient } from 'app/constants/DbClient';
-	import { ServicePorts } from 'app/constants/ports';
-	import { ActionNames } from 'app/constants/names/actions';
-	import { ModuleNames } from 'app/constants/names/modules';
-	import { CacheSettingKeys } from 'app/constants/setting-keys/cache';
-	import { DbSettingKeys } from 'app/constants/setting-keys/database';
-	import { MbSettingKeys } from 'app/constants/setting-keys/message-broker';
-	import { RpcSettingKeys } from 'app/constants/setting-keys/rpc';
-	import { SvcSettingKeys } from 'app/constants/setting-keys/service';
+declare module '@micro-fleet/common/dist/app/constants/index' {
+	import { DbClient } from '@micro-fleet/common/dist/app/constants/DbClient';
+	import { ServicePorts } from '@micro-fleet/common/dist/app/constants/ports';
+	import { ActionNames } from '@micro-fleet/common/dist/app/constants/names/actions';
+	import { ModuleNames } from '@micro-fleet/common/dist/app/constants/names/modules';
+	import { CacheSettingKeys } from '@micro-fleet/common/dist/app/constants/setting-keys/cache';
+	import { DbSettingKeys } from '@micro-fleet/common/dist/app/constants/setting-keys/database';
+	import { MbSettingKeys } from '@micro-fleet/common/dist/app/constants/setting-keys/message-broker';
+	import { RpcSettingKeys } from '@micro-fleet/common/dist/app/constants/setting-keys/rpc';
+	import { SvcSettingKeys } from '@micro-fleet/common/dist/app/constants/setting-keys/service';
 	export type Constants = {
 	    DbClient: typeof DbClient;
 	    ServicePorts: typeof ServicePorts;
@@ -694,7 +694,7 @@ declare module 'app/constants/index' {
 	export const constants: Constants;
 
 }
-declare module 'app/models/Maybe' {
+declare module '@micro-fleet/common/dist/app/models/Maybe' {
 	/**
 	 * Represents an object which may or may not have a value.
 	 * Use this class to avoid assigning `null` to a variable.
@@ -720,9 +720,9 @@ declare module 'app/models/Maybe' {
 	}
 
 }
-declare module 'app/validators/ValidationError' {
+declare module '@micro-fleet/common/dist/app/validators/ValidationError' {
 	import * as joi from 'joi';
-	import { MinorException } from 'app/models/Exceptions';
+	import { MinorException } from '@micro-fleet/common/dist/app/models/Exceptions';
 	/**
 	 * Represents a validation error for a property.
 	 * UI Form should use this information to highlight the particular input.
@@ -750,9 +750,9 @@ declare module 'app/validators/ValidationError' {
 	    	}
 
 }
-declare module 'app/validators/JoiModelValidator' {
+declare module '@micro-fleet/common/dist/app/validators/JoiModelValidator' {
 	import * as joi from 'joi';
-	import { ValidationError } from 'app/validators/ValidationError';
+	import { ValidationError } from '@micro-fleet/common/dist/app/validators/ValidationError';
 	export interface ValidationOptions extends joi.ValidationOptions {
 	}
 	export class JoiModelValidator<T> {
@@ -816,9 +816,9 @@ declare module 'app/validators/JoiModelValidator' {
 	}
 
 }
-declare module 'app/translators/ModelAutoMapper' {
-	import { JoiModelValidator } from 'app/validators/JoiModelValidator';
-	import { ValidationError } from 'app/validators/ValidationError';
+declare module '@micro-fleet/common/dist/app/translators/ModelAutoMapper' {
+	import { JoiModelValidator } from '@micro-fleet/common/dist/app/validators/JoiModelValidator';
+	import { ValidationError } from '@micro-fleet/common/dist/app/validators/ValidationError';
 	export interface MappingOptions {
 	    /**
 	     * Temporarily turns on or off model validation.
@@ -888,9 +888,9 @@ declare module 'app/translators/ModelAutoMapper' {
 	    	    	}
 
 }
-declare module 'app/models/settings/SettingItem' {
-	import { ModelAutoMapper } from 'app/translators/ModelAutoMapper';
-	import { JoiModelValidator } from 'app/validators/JoiModelValidator';
+declare module '@micro-fleet/common/dist/app/models/settings/SettingItem' {
+	import { ModelAutoMapper } from '@micro-fleet/common/dist/app/translators/ModelAutoMapper';
+	import { JoiModelValidator } from '@micro-fleet/common/dist/app/validators/JoiModelValidator';
 	export enum SettingItemDataType {
 	    /**
 	     * Text data type, that is rendered as a text box on UI.
@@ -938,9 +938,9 @@ declare module 'app/models/settings/SettingItem' {
 	}
 
 }
-declare module 'app/interfaces/configurations' {
-	import { Maybe } from 'app/models/Maybe';
-	import { SettingItemDataType } from 'app/models/settings/SettingItem';
+declare module '@micro-fleet/common/dist/app/interfaces/configurations' {
+	import { Maybe } from '@micro-fleet/common/dist/app/models/Maybe';
+	import { SettingItemDataType } from '@micro-fleet/common/dist/app/models/settings/SettingItem';
 	/**
 	 * Stores a database connection detail.
 	 */
@@ -1012,9 +1012,9 @@ declare module 'app/interfaces/configurations' {
 	}
 
 }
-declare module 'app/models/settings/CacheSettings' {
-	import { /*IConfigurationProvider,*/ CacheConnectionDetail } from 'app/interfaces/configurations';
-	import { SettingItem } from 'app/models/settings/SettingItem';
+declare module '@micro-fleet/common/dist/app/models/settings/CacheSettings' {
+	import { /*IConfigurationProvider,*/ CacheConnectionDetail } from '@micro-fleet/common/dist/app/interfaces/configurations';
+	import { SettingItem } from '@micro-fleet/common/dist/app/models/settings/SettingItem';
 	/**
 	 * Represents an array of cache settings.
 	 */
@@ -1031,10 +1031,10 @@ declare module 'app/models/settings/CacheSettings' {
 	}
 
 }
-declare module 'app/models/settings/DatabaseSettings' {
-	import { /*IConfigurationProvider,*/ DbConnectionDetail } from 'app/interfaces/configurations';
-	import { Maybe } from 'app/models/Maybe';
-	import { SettingItem } from 'app/models/settings/SettingItem';
+declare module '@micro-fleet/common/dist/app/models/settings/DatabaseSettings' {
+	import { /*IConfigurationProvider,*/ DbConnectionDetail } from '@micro-fleet/common/dist/app/interfaces/configurations';
+	import { Maybe } from '@micro-fleet/common/dist/app/models/Maybe';
+	import { SettingItem } from '@micro-fleet/common/dist/app/models/settings/SettingItem';
 	/**
 	 * Represents an array of database settings.
 	 */
@@ -1052,9 +1052,9 @@ declare module 'app/models/settings/DatabaseSettings' {
 	}
 
 }
-declare module 'app/models/settings/GetSettingRequest' {
-	import { ModelAutoMapper } from 'app/translators/ModelAutoMapper';
-	import { JoiModelValidator } from 'app/validators/JoiModelValidator';
+declare module '@micro-fleet/common/dist/app/models/settings/GetSettingRequest' {
+	import { ModelAutoMapper } from '@micro-fleet/common/dist/app/translators/ModelAutoMapper';
+	import { JoiModelValidator } from '@micro-fleet/common/dist/app/validators/JoiModelValidator';
 	/**
 	 * Represents the request contract for GetSetting endpoint.
 	 */
@@ -1072,7 +1072,7 @@ declare module 'app/models/settings/GetSettingRequest' {
 	}
 
 }
-declare module 'app/models/PagedArray' {
+declare module '@micro-fleet/common/dist/app/models/PagedArray' {
 	/**
 	 * A wrapper array that contains paged items.
 	 */
@@ -1092,80 +1092,24 @@ declare module 'app/models/PagedArray' {
 	}
 
 }
-declare module 'app/index' {
+declare module '@micro-fleet/common' {
 	import 'bluebird-global';
-	import constantObj = require('app/constants/index');
+	import constantObj = require('@micro-fleet/common/dist/app/constants/index');
 	export const constants: constantObj.Constants;
-	export * from 'app/interfaces/configurations';
-	export * from 'app/models/settings/CacheSettings';
-	export * from 'app/models/settings/DatabaseSettings';
-	export * from 'app/models/settings/GetSettingRequest';
-	export * from 'app/models/settings/SettingItem';
-	export * from 'app/models/Exceptions';
-	export * from 'app/models/Maybe';
-	export * from 'app/models/PagedArray';
-	export * from 'app/translators/ModelAutoMapper';
-	export * from 'app/validators/JoiModelValidator';
-	export * from 'app/validators/ValidationError';
-	export * from 'app/DependencyContainer';
-	export * from 'app/HandlerContainer';
-	export * from 'app/Guard';
-	export * from 'app/Types';
-
-}
-declare module 'test/DependencyContainer.spec' {
-	export {};
-
-}
-declare module 'test/Exceptions.spec' {
-	export {};
-
-}
-declare module 'test/Guard.spec' {
-	export {};
-
-}
-declare module 'test/HandlerContainer.spec' {
-	export {};
-
-}
-declare module 'test/PagedArray.spec' {
-	export {};
-
-}
-declare module 'test/models/CacheSettings.spec' {
-	export {};
-
-}
-declare module 'test/models/DatabaseSettings.spec' {
-	export {};
-
-}
-declare module 'test/models/GetSettingRequest.spec' {
-	export {};
-
-}
-declare module 'test/models/SettingItem.spec' {
-	export {};
-
-}
-declare module 'test/validators/SampleModel' {
-	import { JoiModelValidator } from 'app';
-	export class SampleModel {
-	    static validator: JoiModelValidator<SampleModel>;
-	    readonly theID: number;
-	    readonly name: string;
-	    readonly address: string;
-	    readonly age: number;
-	    readonly gender: 'male' | 'female';
-	}
-
-}
-declare module 'test/translators/ModelAutoMapper.spec' {
-	export {};
-
-}
-declare module 'test/validators/JoiModelValidator.spec' {
-	export {};
+	export * from '@micro-fleet/common/dist/app/interfaces/configurations';
+	export * from '@micro-fleet/common/dist/app/models/settings/CacheSettings';
+	export * from '@micro-fleet/common/dist/app/models/settings/DatabaseSettings';
+	export * from '@micro-fleet/common/dist/app/models/settings/GetSettingRequest';
+	export * from '@micro-fleet/common/dist/app/models/settings/SettingItem';
+	export * from '@micro-fleet/common/dist/app/models/Exceptions';
+	export * from '@micro-fleet/common/dist/app/models/Maybe';
+	export * from '@micro-fleet/common/dist/app/models/PagedArray';
+	export * from '@micro-fleet/common/dist/app/translators/ModelAutoMapper';
+	export * from '@micro-fleet/common/dist/app/validators/JoiModelValidator';
+	export * from '@micro-fleet/common/dist/app/validators/ValidationError';
+	export * from '@micro-fleet/common/dist/app/DependencyContainer';
+	export * from '@micro-fleet/common/dist/app/HandlerContainer';
+	export * from '@micro-fleet/common/dist/app/Guard';
+	export * from '@micro-fleet/common/dist/app/Types';
 
 }

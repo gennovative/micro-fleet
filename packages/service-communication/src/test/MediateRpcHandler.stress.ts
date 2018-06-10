@@ -1,20 +1,17 @@
 import 'reflect-metadata';
 import * as shortid from 'shortid';
-import { injectable, DependencyContainer } from '@micro-fleet/common-util';
+import { injectable, DependencyContainer } from '@micro-fleet/common';
 
 import { MessageBrokerRpcHandler, IMessage,
-	TopicMessageBrokerConnector, IRpcRequest, IRpcResponse } from '../app';
+	TopicMessageBrokerConnector, IRpcRequest } from '../app';
 
 import rabbitOpts from './rabbit-options';
 
 
 const MODULE = 'TestHandler',
 	CONTROLLER_NORM = Symbol('NormalProductController'),
-	CONTROLLER_ERR = Symbol('ErrorProductController'),
 	SUCCESS_ADD_PRODUCT = 'addProductOk',
-	SUCCESS_DEL_PRODUCT = 'removeOk',
-	ERROR_ADD_PRODUCT = 'addProductError',
-	ERROR_DEL_PRODUCT = 'removeError';
+	SUCCESS_DEL_PRODUCT = 'removeOk';
 
 
 @injectable()
@@ -90,12 +87,11 @@ describe.skip('MediateRpcHandler', function() {
 
 		// Assert
 		let replyTo = `response.${MODULE}.${ACTION}`,
-			start, end;
+			start: number, end: number;
 		
 		callerMbConn.subscribe(replyTo)
 			.then(() => {
 				return handlerMbConn.listen((msg: IMessage) => {
-					let response: IRpcResponse = msg.data;
 					end = new Date().getTime();
 					console.log(`Response after ${end - start}ms`);
 				});

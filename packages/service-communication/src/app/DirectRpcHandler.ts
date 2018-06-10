@@ -3,8 +3,8 @@ import * as http from 'http';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 
-import { injectable, inject, IDependencyContainer, Guard, Exception, HandlerContainer,
-	ActionFactory, HandlerDetails, Types as CmT } from '@micro-fleet/common-util';
+import { injectable, inject, IDependencyContainer, Guard, HandlerContainer,
+	ActionFactory, Types as CmT } from '@micro-fleet/common';
 
 import * as rpc from './RpcCommon';
 
@@ -105,7 +105,7 @@ export class ExpressRpcHandler
 	 * @see IRpcHandler.dispose
 	 */
 	public dispose(): Promise<void> {
-		return new Promise<void>((resolve, reject) => {
+		return new Promise<void>((resolve) => {
 			this._server.close(() => {
 				this._server = null;
 				resolve();

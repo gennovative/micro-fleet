@@ -1,5 +1,5 @@
-import { IConfigurationProvider, constants } from '@micro-fleet/common-contracts';
-import { inject, injectable, unmanaged, Guard } from '@micro-fleet/common-util';
+import { IConfigurationProvider, constants, injectable, unmanaged,
+	Guard } from '@micro-fleet/common';
 
 import { IMediateRpcHandler } from './MediateRpcHandler';
 
@@ -27,7 +27,7 @@ export abstract class MediateRpcHandlerAddOnBase implements IServiceAddOn {
 	 */
 	public init(moduleName: string = null): Promise<void> {
 		this._rpcHandler.module = moduleName;
-		this._rpcHandler.name = this._configProvider.get(S.SERVICE_SLUG);
+		this._rpcHandler.name = this._configProvider.get(S.SERVICE_SLUG).value as string;
 		this._rpcHandler.init();
 		this.handleRequests();
 		return this._rpcHandler.start();

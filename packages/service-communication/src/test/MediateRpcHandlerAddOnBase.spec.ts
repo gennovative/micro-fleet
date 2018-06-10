@@ -1,14 +1,14 @@
 import * as chai from 'chai';
 import * as spies from 'chai-spies';
 
-import { IConfigurationProvider, Types as ConT, constants } from '@micro-fleet/common-contracts';
-import { injectable, inject, Guard, DependencyContainer } from '@micro-fleet/common-util';
-import { IMediateRpcHandler, IRpcRequest, IMessageBrokerConnector,
+import { IConfigurationProvider, Types as ConT, constants, Maybe,
+	injectable, inject, DependencyContainer } from '@micro-fleet/common';
+import { IMediateRpcHandler, IMessageBrokerConnector,
 	IConnectionOptions, IPublishOptions, MessageHandleFunction,
 	MediateRpcHandlerAddOnBase, MessageBrokerRpcHandler,
 	Types as ComT } from '../app';
 
-const { RpcSettingKeys: RpcS, SvcSettingKeys: SvcS } = constants;
+const { SvcSettingKeys: SvcS } = constants;
 
 chai.use(spies);
 const expect = chai.expect;
@@ -40,10 +40,10 @@ class MockConfigProvider implements IConfigurationProvider {
 
 	}
 
-	public get(key: string): number & boolean & string {
+	public get(key: string): Maybe<number | boolean | string> {
 		switch (key) {
-			case SvcS.SERVICE_SLUG: return <any>SERVICE_SLUG;
-			default: return null;
+			case SvcS.SERVICE_SLUG: return new Maybe(SERVICE_SLUG);
+			default: return new Maybe;
 		}
 	}
 
@@ -55,8 +55,6 @@ class MockConfigProvider implements IConfigurationProvider {
 class MockMbConnector implements IMessageBrokerConnector {
 	public messageExpiredIn: number;
 	public subscribedPatterns: string[];
-
-	private _connections = [];
 
 	public get queue(): string {
 		return '';
@@ -102,20 +100,10 @@ class MockMbConnector implements IMessageBrokerConnector {
 		return Promise.resolve();
 	}
 
-	public onError(handler: (err) => void): void {
+	public onError(handler: (err: any) => void): void {
 	}
 }
 
-class CustomController {
-	public add(requestPayload: any, resolve: PromiseResolveFn, reject: PromiseRejectFn, rawRequest: IRpcRequest): void {
-	}
-
-	public remove(requestPayload: any, resolve: PromiseResolveFn, reject: PromiseRejectFn, rawRequest: IRpcRequest): void {
-	}
-
-	public echo(requestPayload: any, resolve: PromiseResolveFn, reject: PromiseRejectFn, rawRequest: IRpcRequest): void {
-	}
-}
 
 @injectable()
 class CustomAddOn extends MediateRpcHandlerAddOnBase {

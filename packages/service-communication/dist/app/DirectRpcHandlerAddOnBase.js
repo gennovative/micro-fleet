@@ -12,9 +12,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_contracts_1 = require("@micro-fleet/common-contracts");
-const common_util_1 = require("@micro-fleet/common-util");
-const { RpcSettingKeys: RpcS, SvcSettingKeys: SvcS } = common_contracts_1.constants;
+const common_1 = require("@micro-fleet/common");
+const { RpcSettingKeys: RpcS, SvcSettingKeys: SvcS } = common_1.constants;
 /**
  * Base class for DirectRpcAddOn.
  */
@@ -22,16 +21,16 @@ let DirectRpcHandlerAddOnBase = class DirectRpcHandlerAddOnBase {
     constructor(_configProvider, _rpcHandler) {
         this._configProvider = _configProvider;
         this._rpcHandler = _rpcHandler;
-        common_util_1.Guard.assertArgDefined('_configProvider', _configProvider);
-        common_util_1.Guard.assertArgDefined('_rpcHandler', _rpcHandler);
+        common_1.Guard.assertArgDefined('_configProvider', _configProvider);
+        common_1.Guard.assertArgDefined('_rpcHandler', _rpcHandler);
     }
     /**
      * @see IServiceAddOn.init
      */
     init(moduleName = null) {
         this._rpcHandler.module = moduleName;
-        this._rpcHandler.name = this._configProvider.get(SvcS.SERVICE_SLUG);
-        this._rpcHandler.port = this._configProvider.get(RpcS.RPC_HANDLER_PORT);
+        this._rpcHandler.name = this._configProvider.get(SvcS.SERVICE_SLUG).value;
+        this._rpcHandler.port = this._configProvider.get(RpcS.RPC_HANDLER_PORT).value;
         this._rpcHandler.init();
         this.handleRequests();
         return this._rpcHandler.start();
@@ -55,11 +54,10 @@ let DirectRpcHandlerAddOnBase = class DirectRpcHandlerAddOnBase {
     }
 };
 DirectRpcHandlerAddOnBase = __decorate([
-    common_util_1.injectable(),
-    __param(0, common_util_1.unmanaged()),
-    __param(1, common_util_1.unmanaged()),
+    common_1.injectable(),
+    __param(0, common_1.unmanaged()),
+    __param(1, common_1.unmanaged()),
     __metadata("design:paramtypes", [Object, Object])
 ], DirectRpcHandlerAddOnBase);
 exports.DirectRpcHandlerAddOnBase = DirectRpcHandlerAddOnBase;
-
 //# sourceMappingURL=DirectRpcHandlerAddOnBase.js.map

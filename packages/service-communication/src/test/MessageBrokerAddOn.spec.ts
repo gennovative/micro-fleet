@@ -1,12 +1,10 @@
 import * as chai from 'chai';
 import * as spies from 'chai-spies';
 
-import { IConfigurationProvider, constants } from '@micro-fleet/common-contracts';
+import { IConfigurationProvider, Maybe } from '@micro-fleet/common';
 
 import { IMessageBrokerConnector, IConnectionOptions, IPublishOptions,
 	MessageHandleFunction, MessageBrokerAddOn } from '../app';
-
-const { MbSettingKeys: S } = constants;
 
 
 chai.use(spies);
@@ -19,8 +17,8 @@ class MockConfigAddOn implements IConfigurationProvider {
 		return true;
 	}
 
-	public get(key: string): number & boolean & string {
-		return <any>'';
+	public get(key: string): Maybe<number | boolean | string> {
+		return new Maybe('');
 	}
 
 	public deadLetter(): Promise<void> {
@@ -46,8 +44,6 @@ class MockConfigAddOn implements IConfigurationProvider {
 class MockMbConnector implements IMessageBrokerConnector {
 	public messageExpiredIn: number;
 	public subscribedPatterns: string[];
-
-	private _connections = [];
 
 	public get queue(): string {
 		return '';
@@ -93,7 +89,7 @@ class MockMbConnector implements IMessageBrokerConnector {
 		return Promise.resolve();
 	}
 
-	public onError(handler: (err) => void): void {
+	public onError(handler: (err: any) => void): void {
 	}
 }
 

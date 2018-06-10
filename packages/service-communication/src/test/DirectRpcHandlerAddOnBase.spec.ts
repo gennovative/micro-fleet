@@ -1,9 +1,9 @@
 import * as chai from 'chai';
 import * as spies from 'chai-spies';
 
-import { IConfigurationProvider, Types as ConT, constants } from '@micro-fleet/common-contracts';
-import { injectable, inject, Guard, DependencyContainer } from '@micro-fleet/common-util';
-import { IDirectRpcHandler, IMessageBrokerConnector, ExpressRpcHandler,
+import { IConfigurationProvider, Types as ConT, constants, Maybe,
+	injectable, inject, DependencyContainer } from '@micro-fleet/common';
+import { IDirectRpcHandler, ExpressRpcHandler,
 	DirectRpcHandlerAddOnBase, Types as ComT } from '../app';
 
 chai.use(spies);
@@ -36,11 +36,11 @@ class MockConfigProvider implements IConfigurationProvider {
 
 	}
 
-	public get(key: string): number & boolean & string {
+	public get(key: string): Maybe<number | boolean | string> {
 		switch (key) {
-			case RpcS.RPC_HANDLER_PORT: return <any>HANDLER_PORT;
-			case SvcS.SERVICE_SLUG: return <any>SERVICE_SLUG;
-			default: return null;
+			case RpcS.RPC_HANDLER_PORT: return new Maybe(HANDLER_PORT);
+			case SvcS.SERVICE_SLUG: return new Maybe(SERVICE_SLUG);
+			default: return new Maybe;
 		}
 	}
 

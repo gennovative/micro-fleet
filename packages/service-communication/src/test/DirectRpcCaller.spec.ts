@@ -1,11 +1,12 @@
+import http from 'http';
+
 import 'reflect-metadata';
 import { expect } from 'chai';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
-import { MinorException, Exception } from '@micro-fleet/common-util';
+import { MinorException } from '@micro-fleet/common';
 
-import { HttpRpcCaller, ExpressRpcHandler, IDirectRpcHandler, IDirectRpcCaller,
-	IRpcRequest, IRpcResponse } from '../app';
+import { HttpRpcCaller, IDirectRpcCaller, IRpcRequest, IRpcResponse } from '../app';
 
 
 const HANDLER_ADDR = 'localhost:3000',
@@ -37,7 +38,7 @@ describe('HttpRpcCaller', () => {
 
 	describe('call', () => {
 
-		let server;
+		let server: http.Server;
 
 		afterEach(done => {
 			if (server) {
@@ -50,7 +51,7 @@ describe('HttpRpcCaller', () => {
 
 		it('Should make request and wait for response', done => {
 			// Arrange
-			let app = express(),
+			const app = express(),
 				router = express.Router();
 
 			caller.name = CALLER_NAME;
@@ -63,7 +64,7 @@ describe('HttpRpcCaller', () => {
 			router.get('/', (req, res) => res.send('Hello! Postman'));
 
 			router.post(`/${ACTION}`, (req: express.Request, res: express.Response) => {
-				let request: IRpcRequest = req.body;
+				const request: IRpcRequest = req.body;
 				// Assert
 				expect(request).to.exist;
 				expect(request.payload.msg).to.equal(TEXT_REQUEST);

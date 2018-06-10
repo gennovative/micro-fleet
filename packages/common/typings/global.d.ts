@@ -6,6 +6,12 @@
  */
 //declare module '*';
 
+declare namespace NodeJS {
+	export interface Global {
+        gennova: any;
+    }
+}
+
 /**
  * A data type representing Json object.
  */

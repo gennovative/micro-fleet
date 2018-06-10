@@ -10,10 +10,10 @@ async function definition() {
 	log.bold('> definition.js');
 
 	const CWD = process.cwd();
-	const PKG = fs.readJson(path.join(CWD, 'package.json'));
+	const PKG = await fs.readJson(path.join(CWD, 'package.json'));
 	const DEF_FILE = path.join(CWD, 'typings', 'app.d.ts');
 	const config = {
-		name: PKG['name'],
+		name: `${PKG.name}/dist`,
 		project: CWD,
 		out: DEF_FILE,
 		sendMessage: console.log,

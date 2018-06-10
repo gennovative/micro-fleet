@@ -1,8 +1,8 @@
 import { injectable, inject, IDependencyContainer, Guard, HandlerContainer,
-	ActionFactory, HandlerDetails, Exception, Types as CmT } from '@micro-fleet/common-util';
+	ActionFactory, Types as CmT } from '@micro-fleet/common';
 
 import { Types as T } from './Types';
-import { IMessageBrokerConnector, IMessage, MessageHandleFunction } from './MessageBrokerConnector';
+import { IMessageBrokerConnector, IMessage } from './MessageBrokerConnector';
 import * as rpc from './RpcCommon';
 
 

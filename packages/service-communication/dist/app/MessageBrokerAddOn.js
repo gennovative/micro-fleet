@@ -12,29 +12,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_contracts_1 = require("@micro-fleet/common-contracts");
-const common_util_1 = require("@micro-fleet/common-util");
+const common_1 = require("@micro-fleet/common");
 const Types_1 = require("./Types");
-const { MbSettingKeys: S } = common_contracts_1.constants;
+const { MbSettingKeys: S } = common_1.constants;
 let MessageBrokerAddOn = class MessageBrokerAddOn {
     constructor(_configProvider, _msgBrokerCnn) {
         this._configProvider = _configProvider;
         this._msgBrokerCnn = _msgBrokerCnn;
-        common_util_1.Guard.assertArgDefined('_configProvider', _configProvider);
-        common_util_1.Guard.assertArgDefined('_msgBrokerCnn', _msgBrokerCnn);
+        common_1.Guard.assertArgDefined('_configProvider', _configProvider);
+        common_1.Guard.assertArgDefined('_msgBrokerCnn', _msgBrokerCnn);
     }
     /**
      * @see IServiceAddOn.init
      */
     init() {
         let cfgAdt = this._configProvider, opts = {
-            hostAddress: cfgAdt.get(S.MSG_BROKER_HOST),
-            username: cfgAdt.get(S.MSG_BROKER_USERNAME),
-            password: cfgAdt.get(S.MSG_BROKER_PASSWORD),
-            exchange: cfgAdt.get(S.MSG_BROKER_EXCHANGE),
-            queue: cfgAdt.get(S.MSG_BROKER_QUEUE),
-            reconnectDelay: cfgAdt.get(S.MSG_BROKER_RECONN_TIMEOUT),
-            messageExpiredIn: cfgAdt.get(S.MSG_BROKER_RECONN_TIMEOUT),
+            hostAddress: cfgAdt.get(S.MSG_BROKER_HOST).value,
+            username: cfgAdt.get(S.MSG_BROKER_USERNAME).value,
+            password: cfgAdt.get(S.MSG_BROKER_PASSWORD).value,
+            exchange: cfgAdt.get(S.MSG_BROKER_EXCHANGE).value,
+            queue: cfgAdt.get(S.MSG_BROKER_QUEUE).value,
+            reconnectDelay: cfgAdt.get(S.MSG_BROKER_RECONN_TIMEOUT).value,
+            messageExpiredIn: cfgAdt.get(S.MSG_BROKER_RECONN_TIMEOUT).value,
         };
         return this._msgBrokerCnn.connect(opts);
     }
@@ -52,11 +51,10 @@ let MessageBrokerAddOn = class MessageBrokerAddOn {
     }
 };
 MessageBrokerAddOn = __decorate([
-    common_util_1.injectable(),
-    __param(0, common_util_1.inject(common_contracts_1.Types.CONFIG_PROVIDER)),
-    __param(1, common_util_1.inject(Types_1.Types.MSG_BROKER_CONNECTOR)),
+    common_1.injectable(),
+    __param(0, common_1.inject(common_1.Types.CONFIG_PROVIDER)),
+    __param(1, common_1.inject(Types_1.Types.MSG_BROKER_CONNECTOR)),
     __metadata("design:paramtypes", [Object, Object])
 ], MessageBrokerAddOn);
 exports.MessageBrokerAddOn = MessageBrokerAddOn;
-
 //# sourceMappingURL=MessageBrokerAddOn.js.map

@@ -5,7 +5,7 @@ import * as amqp from 'amqplib';
 import * as _ from 'lodash';
 
 import { injectable, Exception, CriticalException, MinorException,
-	Guard } from '@micro-fleet/common-util';
+	Guard } from '@micro-fleet/common';
 
 
 export type MessageHandleFunction = (msg: IMessage, ack?: () => void, nack?: () => void) => void;
@@ -152,7 +152,7 @@ export interface IMessageBrokerConnector {
 	/**
 	 * Registers a listener to handle errors.
 	 */
-	onError(handler: (err) => void): void;
+	onError(handler: (err: any) => void): void;
 }
 
 @injectable()
@@ -392,8 +392,7 @@ export class TopicMessageBrokerConnector implements IMessageBrokerConnector {
 				// Create a new publishing channel if there is not already, and from now on we publish to this only channel.
 				this._publishChanPrm = this.createPublishChannel();
 			}
-			let ch: amqp.Channel = await this._publishChanPrm,
-				opt: amqp.Options.Publish;
+			let ch: amqp.Channel = await this._publishChanPrm;
 			let [msg, opts] = this.buildMessage(payload, options);
 
 			// We publish to exchange, then the exchange will route to appropriate consuming queue.
@@ -456,7 +455,7 @@ export class TopicMessageBrokerConnector implements IMessageBrokerConnector {
 	/**
 	 * @see IMessageBrokerConnector.onError
 	 */
-	public onError(handler: (err) => void): void {
+	public onError(handler: (err: any) => void): void {
 		this._emitter.on('error', handler);
 	}
 
@@ -574,7 +573,7 @@ export class TopicMessageBrokerConnector implements IMessageBrokerConnector {
 		}
 	}
 
-	private async bindQueue(channel: amqp.Channel, matchingPattern: string): Promise<string> {
+	private async bindQueue(channel: amqp.Channel, matchingPattern: string): Promise<void> {
 		try {
 			let queue = this.queue,
 				isTempQueue = (queue.indexOf('auto-gen') == 0);
@@ -594,13 +593,7 @@ export class TopicMessageBrokerConnector implements IMessageBrokerConnector {
 		}
 	}
 
-	private unbindQueue(channelPromise: Promise<amqp.Channel>, matchingPattern: string): Promise<void> {
-		return <any>channelPromise.then(
-			ch => ch.unbindQueue(this._queue, this._exchange, matchingPattern)
-		);
-	}
-
-	private handleError(err, message: string): Promise<never> {
+	private handleError(err: any, message: string): Promise<never> {
 		if (err instanceof Exception) {
 			// If this is already a wrapped exception.
 			return Promise.reject(err);

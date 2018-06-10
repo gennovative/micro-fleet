@@ -1,15 +1,14 @@
 import { EventEmitter } from 'events';
-import * as express from 'express-serve-static-core';
 
 import { injectable, IDependencyContainer, Guard,
-	ActionFactory, MinorException, Exception, InternalErrorException } from '@micro-fleet/common-util';
-import { ValidationError } from '@micro-fleet/common-contracts';
+	ActionFactory, MinorException, Exception, InternalErrorException,
+	ValidationError } from '@micro-fleet/common';
 
-let descriptor = {
+const descriptor = {
 	writable: false,
 	enumerable: false,
 	configurable: false,
-	value: null
+	value: null as any
 };
 
 if (!global.gennova) {
@@ -17,7 +16,7 @@ if (!global.gennova) {
 	Object.defineProperty(global, 'gennova', descriptor);
 }
 
-let gennova = global.gennova;
+const gennova = global.gennova;
 
 /* istanbul ignore else */
 if (!gennova['ValidationError']) {
@@ -88,7 +87,7 @@ export interface IRpcCaller {
 	/**
 	 * Registers a listener to handle errors.
 	 */
-	onError(handler: (err) => void): void;
+	onError(handler: (err: any) => void): void;
 }
 
 
@@ -121,7 +120,7 @@ export interface IRpcHandler {
 	/**
 	 * Registers a listener to handle errors.
 	 */
-	onError(handler: (err) => void): void;
+	onError(handler: (err: any) => void): void;
 
 	/**
 	 * Starts listening to requests.
@@ -181,21 +180,21 @@ export abstract class RpcCallerBase {
 	/**
 	 * @see IRpcCaller.onError
 	 */
-	public onError(handler: (err) => void): void {
+	public onError(handler: (err: any) => void): void {
 		this._emitter.on('error', handler);
 	}
 
 
-	protected emitError(err): void {
+	protected emitError(err: any): void {
 		this._emitter.emit('error', err);
 	}
 
-	protected rebuildError(payload) {
+	protected rebuildError(payload: any) {
 		if (payload.type) {
 			// Expect response.payload.type = MinorException | ValidationError
 			return new global.gennova[payload.type](payload.message);
 		} else {
-			let ex = new MinorException(payload.message);
+			const ex = new MinorException(payload.message);
 			ex.stack = payload.stack;
 			return ex;
 		}
@@ -227,16 +226,16 @@ export abstract class RpcHandlerBase {
 	/**
 	 * @see IRpcHandler.onError
 	 */
-	public onError(handler: (err) => void): void {
+	public onError(handler: (err: any) => void): void {
 		this._emitter.on('error', handler);
 	}
 
 
-	protected emitError(err): void {
+	protected emitError(err: any): void {
 		this._emitter.emit('error', err);
 	}
 
-	protected createResponse(isSuccess, payload, replyTo: string): IRpcResponse {
+	protected createResponse(isSuccess: boolean, payload: any, replyTo: string): IRpcResponse {
 		return {
 			isSuccess,
 			from: this.name,
@@ -245,9 +244,9 @@ export abstract class RpcHandlerBase {
 		};
 	}
 
-	protected createError(rawError) {
+	protected createError(rawError: any) {
 		// TODO: Should log this unexpected error.
-		let errObj: any = {};
+		const errObj: any = {};
 		if (rawError instanceof MinorException) {
 			// If this is a minor error, or the action method sends this error
 			// back to caller on purpose.
@@ -261,7 +260,7 @@ export abstract class RpcHandlerBase {
 			errObj.message = rawError.message;
 			this.emitError(rawError);
 		} else {
-			let ex = new MinorException(rawError + '');
+			const ex = new MinorException(rawError + '');
 			errObj.type = 'InternalErrorException';
 			this.emitError(ex.message);
 		}

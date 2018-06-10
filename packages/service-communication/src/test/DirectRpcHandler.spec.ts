@@ -3,10 +3,9 @@ import * as chai from 'chai';
 import * as spies from 'chai-spies';
 import * as express from 'express';
 import * as requestMaker from 'request-promise';
-import { inject, injectable, DependencyContainer, MinorException, Exception,
-	InternalErrorException } from '@micro-fleet/common-util';
+import { injectable, DependencyContainer, MinorException } from '@micro-fleet/common';
 
-import { ExpressRpcHandler, IDirectRpcHandler, IRpcRequest, IRpcResponse } from '../app';
+import { ExpressRpcHandler, IRpcRequest, IRpcResponse } from '../app';
 
 chai.use(spies);
 const expect = chai.expect;
@@ -64,7 +63,7 @@ describe('ExpressDirectRpcHandler', () => {
 	describe('init', () => {
 		it('Should use provided express and router instances', () => {
 			// Arrange
-			let handler = new ExpressRpcHandler(new DependencyContainer()),
+			const handler = new ExpressRpcHandler(new DependencyContainer()),
 				app = express(),
 				router = express.Router();
 
@@ -83,7 +82,7 @@ describe('ExpressDirectRpcHandler', () => {
 
 		it('Should use `name` property to init Router', () => {
 			// Arrange
-			let handler = new ExpressRpcHandler(new DependencyContainer());
+			const handler = new ExpressRpcHandler(new DependencyContainer());
 
 			// Act
 			handler.module = MODULE;
@@ -91,10 +90,10 @@ describe('ExpressDirectRpcHandler', () => {
 			handler.init();
 
 			// Assert
-			let app: express.Express = handler['_app'];
+			const  app: express.Express = handler['_app'];
 			expect(app._router.stack).to.be.not.null;
 
-			let router = app._router.stack.find(entry => entry.name == 'router');
+			const  router = app._router.stack.find((entry: any) => entry.name == 'router');
 			expect(router).to.be.not.null;
 
 			expect(`/${MODULE}`).to.match(router.regexp);
@@ -105,7 +104,7 @@ describe('ExpressDirectRpcHandler', () => {
 	describe('start', () => {
 		it('Should raise error if problems occur', done => {
 			// Arrange
-			let handler = new ExpressRpcHandler(new DependencyContainer()),
+			const  handler = new ExpressRpcHandler(new DependencyContainer()),
 				app = express();
 
 				handler.module = MODULE;
@@ -116,7 +115,7 @@ describe('ExpressDirectRpcHandler', () => {
 			});
 
 			// Start this server to make a port conflict
-			let server = app.listen(handler.port, () => {
+			const  server = app.listen(handler.port, () => {
 
 				handler.onError(err => {
 					// Assert
@@ -157,13 +156,12 @@ describe('ExpressDirectRpcHandler', () => {
 			handler.handle(ACTION, CONTROLLER_NORM);
 
 			// Assert
-			let app: express.Express = handler['_app'],
-				router: express.Router = handler['_router'];
+			const  router: express.Router = handler['_router'];
 			expect(router.stack[0].route.path).to.equal(`/${ACTION}`);
 
 			handler.start()
 				.then(() => {
-					let options: requestMaker.Options = {
+					const  options: requestMaker.Options = {
 						method: 'POST',
 						uri: `http://localhost:${handler.port}/${MODULE}/${ACTION}`,
 						body: {},
@@ -184,13 +182,12 @@ describe('ExpressDirectRpcHandler', () => {
 
 		it('Should add a route path in case action name is resolved by factory.', done => {
 			// Arrange
-			const ACTION = 'deleteProduct';
+			const ACTION = 'deconst eProduct';
 
 			depContainer.bind<NormalProductController>(CONTROLLER_NORM, NormalProductController);
 
 			// Act
-			let app: express.Express = handler['_app'],
-				router: express.Router = handler['_router'];
+			const  router: express.Router = handler['_router'];
 			handler.handle(ACTION, CONTROLLER_NORM, (controller: NormalProductController) => controller.remove.bind(controller));
 
 			// Assert
@@ -198,7 +195,7 @@ describe('ExpressDirectRpcHandler', () => {
 
 			handler.start()
 				.then(() => {
-					let options = {
+					const  options = {
 						method: 'POST',
 						uri: `http://localhost:${handler.port}/${MODULE}/${ACTION}`,
 						body: {},
@@ -224,14 +221,12 @@ describe('ExpressDirectRpcHandler', () => {
 			depContainer.bind<NormalProductController>(CONTROLLER_NORM, NormalProductController);
 
 			// Act
-			let app: express.Express = handler['_app'],
-				router: express.Router = handler['_router'];
 			handler.handle(ACTION, CONTROLLER_NORM);
 
 			// Assert
 			handler.start()
 				.then(() => {
-					let request: IRpcRequest = {
+					const  request: IRpcRequest = {
 						from: '',
 						to: MODULE,
 						payload: {
@@ -267,9 +262,6 @@ describe('ExpressDirectRpcHandler', () => {
 			handler.handle(ACTION, CONTROLLER_ERR);
 
 			// Assert
-			let app: express.Express = handler['_app'],
-				router: express.Router = handler['_router'];
-
 			handler.onError(err => {
 				expect(err).to.exist;
 				spy();
@@ -277,7 +269,7 @@ describe('ExpressDirectRpcHandler', () => {
 
 			handler.start()
 				.then(() => {
-					let options = {
+					const  options = {
 						method: 'POST',
 						uri: `http://localhost:${handler.port}/${MODULE}/${ACTION}`,
 						body: {},
@@ -306,12 +298,9 @@ describe('ExpressDirectRpcHandler', () => {
 			handler.handle(ACTION, CONTROLLER_ERR, (controller: ErrorProductController) => controller.remove.bind(controller));
 
 			// Assert
-			let app: express.Express = handler['_app'],
-				router: express.Router = handler['_router'];
-
 			handler.start()
 				.then(() => {
-					let options = {
+					const options = {
 						method: 'POST',
 						uri: `http://localhost:${handler.port}/${MODULE}/${ACTION}`,
 						body: {},
@@ -343,9 +332,6 @@ describe('ExpressDirectRpcHandler', () => {
 			handler.handle(ACTION, CONTROLLER_ERR, (controller: ErrorProductController) => controller.edit.bind(controller));
 
 			// Assert
-			let app: express.Express = handler['_app'],
-				router: express.Router = handler['_router'];
-
 			handler.onError(err => {
 				expect(err).to.exist;
 				spy();
@@ -353,7 +339,7 @@ describe('ExpressDirectRpcHandler', () => {
 
 			handler.start()
 				.then(() => {
-					let options = {
+					const options = {
 						method: 'POST',
 						uri: `http://localhost:${handler.port}/${MODULE}/${ACTION}`,
 						body: {},
@@ -383,8 +369,6 @@ describe('ExpressDirectRpcHandler', () => {
 			//depContainer.bind<NormalProductController>(CONTROLLER_NORM, NormalProductController);
 
 			// Act
-			let app: express.Express = handler['_app'],
-				router: express.Router = handler['_router'];
 			handler.handle(ACTION, CONTROLLER_NORM);
 
 			handler.onError(err => {
@@ -394,7 +378,7 @@ describe('ExpressDirectRpcHandler', () => {
 
 			handler.start()
 				.then(() => {
-					let request: IRpcRequest = {
+					const request: IRpcRequest = {
 						from: '',
 						to: MODULE,
 						payload: {}
@@ -406,7 +390,7 @@ describe('ExpressDirectRpcHandler', () => {
 						json: true
 					};
 
-					requestMaker(options).then((res: IRpcResponse) => {
+					requestMaker(options).then(() => {
 						// If status 200
 						expect(true, 'Request should NOT be successful!').to.be.false;
 					})
@@ -428,8 +412,6 @@ describe('ExpressDirectRpcHandler', () => {
 			depContainer.bind<NormalProductController>(CONTROLLER_NORM, NormalProductController);
 
 			// Act
-			let app: express.Express = handler['_app'],
-				router: express.Router = handler['_router'];
 			handler.handle(UNEXIST_ACTION, CONTROLLER_NORM);
 
 			handler.onError(err => {
@@ -439,7 +421,7 @@ describe('ExpressDirectRpcHandler', () => {
 
 			handler.start()
 				.then(() => {
-					let request: IRpcRequest = {
+					const request: IRpcRequest = {
 							from: '',
 							to: MODULE,
 							payload: {}
@@ -451,7 +433,7 @@ describe('ExpressDirectRpcHandler', () => {
 							json: true
 						};
 
-					requestMaker(options).then((res: IRpcResponse) => {
+					requestMaker(options).then(() => {
 						// If status 200
 						expect(true, 'Request should NOT be successful!').to.be.false;
 					})

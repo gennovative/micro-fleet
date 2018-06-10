@@ -1,8 +1,6 @@
-import { EventEmitter } from 'events';
-
 import * as request from 'request-promise';
 
-import { injectable, Guard } from '@micro-fleet/common-util';
+import { injectable, Guard } from '@micro-fleet/common';
 
 import * as rpc from './RpcCommon';
 
@@ -22,7 +20,7 @@ export class HttpRpcCaller
 			implements IDirectRpcCaller {
 
 	private _baseAddress: string;
-	private _requestMaker: (options) => Promise<any>;
+	private _requestMaker: (options: any) => Promise<any>;
 
 	constructor() {
 		super();
