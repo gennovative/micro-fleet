@@ -5,8 +5,10 @@
   "scripts": {
     "build": "npm run compile && npm run test",
     "clean": "rimraf dist coverage .nyc_output",
+    "definition": "node ../../scripts/definition.js",
     "dedup": "rimraf node_modules/**/node_modules/**/typings",
     "compile": "npm run clean && npm run tslint && tsc --pretty",
+    "release": "npm run build && npm run definition",
     "test": "nyc --reporter=json --reporter=html --include dist/app/**/*.js mocha --recursive dist/test",
     "tslint": "tslint -c tslint.json 'src/**/*.ts'",
     "watch": "npm run clean && npm run tslint && tsc --watch --pretty"
