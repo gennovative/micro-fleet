@@ -1,0 +1,6 @@
+[submodule "packages/common"]
+	path = packages/common
+	url = git@github.com:gennovative/micro-fleet-common.git
+[submodule "packages/service-communication"]
+	path = packages/service-communication
+	url = git@github.com:gennovative/micro-fleet-service-communication.git
