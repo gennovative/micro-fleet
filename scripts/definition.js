@@ -1,7 +1,7 @@
 const fs = require('fs-extra');
 const path = require('path');
 
-const dts = require('dts-generator').default;
+const dts = require('ts-declarator').default;
 
 const log = require('./common');
 
