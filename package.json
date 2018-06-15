@@ -17,11 +17,11 @@
 		"test": "lerna run test",
 		"tslint": "lerna run tslint",
 		"watch": "lerna run watch:ts",
+		"linkbin": "link-parent-bin",
 		"postinstall": "link-parent-bin"
 	},
 	"devDependencies": {
 		"@types/amqplib": "~0.5",
-		"@types/bluebird-global": "~3.5",
 		"@types/chai": "~4.1",
 		"@types/chai-spies": "~0.0.1",
 		"@types/debug": "^0.0.30",
