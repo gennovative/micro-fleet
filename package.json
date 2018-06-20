@@ -3,10 +3,7 @@
 	"version": "1.0.0",
 	"description": "A Docker-friendly microservice-ready framework to develop enterprise-grade applications (not quick prototype).",
 	"workspaces": [
-		"packages/common",
-		"packages/id-generator",
-		"packages/persistence",
-		"packages/service-communication"
+		"packages/*"
 	],
 	"scripts": {
 		"build": "lerna run build",

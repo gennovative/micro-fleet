@@ -6,10 +6,7 @@
 		}
 	},
 	"packages": [
-		"packages/common",
-		"packages/id-generator",
-		"packages/persistence",
-		"packages/service-communication"
+		"packages/*"
 	],
 	"npmClient": "yarn",
 	"useWorkspaces": true,
