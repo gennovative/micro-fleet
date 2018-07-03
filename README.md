@@ -10,6 +10,8 @@ To start developing, these commands need executing:
   * Install dependencies:
     - Make sure you have `cd` to the workspace root.
     - `lerna bootstrap`
+  * Adding new package:
+    - `npm run newpkg -- {package name}`. Example: `npm run newpkg -- logging`. Created package is located in `./packages/{package name}`
 
 ### How This Project Was Initialized
 

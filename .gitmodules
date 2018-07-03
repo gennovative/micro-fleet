@@ -1,12 +1,21 @@
+[submodule "packages/cache"]
+	path = packages/cache
+	url = git@github.com:gennovative/micro-fleet-cache.git
 [submodule "packages/common"]
 	path = packages/common
 	url = git@github.com:gennovative/micro-fleet-common.git
+[submodule "packages/id-generator"]
+	path = packages/id-generator
+	url = git@github.com:gennovative/micro-fleet-id-generator.git
+[submodule "packages/generator-package"]
+	path = packages/generator-package
+	url = git@github.com:gennovative/micro-fleet-generator-package.git
 [submodule "packages/service-communication"]
 	path = packages/service-communication
 	url = git@github.com:gennovative/micro-fleet-service-communication.git
 [submodule "packages/persistence"]
 	path = packages/persistence
 	url = git@github.com:gennovative/micro-fleet-persistence.git
-[submodule "packages/id-generator"]
-	path = packages/id-generator
-	url = git@github.com:gennovative/micro-fleet-id-generator.git
+[submodule "packages/web"]
+	path = packages/web
+	url = git@github.com:gennovative/micro-fleet-web.git
