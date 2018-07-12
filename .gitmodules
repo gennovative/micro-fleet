@@ -10,6 +10,9 @@
 [submodule "packages/generator-package"]
 	path = packages/generator-package
 	url = git@github.com:gennovative/micro-fleet-generator-package.git
+[submodule "packages/microservice"]
+	path = packages/microservice
+	url = git@github.com:gennovative/micro-fleet-microservice.git
 [submodule "packages/service-communication"]
 	path = packages/service-communication
 	url = git@github.com:gennovative/micro-fleet-service-communication.git

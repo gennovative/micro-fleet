@@ -186,7 +186,7 @@
     "@types/express-serve-static-core" "*"
     "@types/serve-static" "*"
 
-"@types/flake-idgen@^0.1.30":
+"@types/flake-idgen@~0.1":
   version "0.1.30"
   resolved "https://registry.yarnpkg.com/@types/flake-idgen/-/flake-idgen-0.1.30.tgz#5e9b42e9f60106ee67fa487c836d331233d99a92"
   dependencies:
@@ -221,9 +221,9 @@
   dependencies:
     "@types/node" "*"
 
-"@types/knex@^0.14.14":
-  version "0.14.14"
-  resolved "https://registry.yarnpkg.com/@types/knex/-/knex-0.14.14.tgz#0fb45549e7cc8ea8400e42a9a61fa650cefe512f"
+"@types/knex@~0.14":
+  version "0.14.15"
+  resolved "https://registry.yarnpkg.com/@types/knex/-/knex-0.14.15.tgz#06cc59bc2d33d4ff178374efdd0efedc9faf526e"
   dependencies:
     "@types/bluebird" "*"
     "@types/events" "*"
@@ -412,7 +412,7 @@
     "@types/express-serve-static-core" "*"
     "@types/mime" "*"
 
-"@types/shortid@^0.0.29":
+"@types/shortid@~0.0.29":
   version "0.0.29"
   resolved "https://registry.yarnpkg.com/@types/shortid/-/shortid-0.0.29.tgz#8093ee0416a6e2bf2aa6338109114b3fbffa0e9b"
 
@@ -1275,7 +1275,7 @@ create-error-class@^3.0.0:
   dependencies:
     capture-stack-trace "^1.0.0"
 
-cross-env@^5.1.6:
+cross-env@~5.1:
   version "5.1.6"
   resolved "https://registry.yarnpkg.com/cross-env/-/cross-env-5.1.6.tgz#0dc05caf945b24e4b9e3b12871fe0e858d08b38d"
   dependencies:
@@ -2132,11 +2132,11 @@ gh-got@^6.0.0:
     got "^7.0.0"
     is-plain-obj "^1.1.0"
 
-git-clone@^0.1.0:
+git-clone@~0.1:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/git-clone/-/git-clone-0.1.0.tgz#0d76163778093aef7f1c30238f2a9ef3f07a2eb9"
 
-git@^0.1.5:
+git@~0.1:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/git/-/git-0.1.5.tgz#9ef62df93f851c27542143bf52d1c68b1017ca15"
   dependencies:
