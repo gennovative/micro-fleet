@@ -22,7 +22,3 @@
 [submodule "packages/web"]
 	path = packages/web
 	url = git@github.com:gennovative/micro-fleet-web.git
-[submodule "packages/rest-membership"]
-	path = packages/rest-membership
-	url = git@bitbucket.org:firstinteractive/back-rest-membership.git
-	branch = development
