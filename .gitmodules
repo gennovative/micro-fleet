@@ -1,3 +1,11 @@
+
+[submodule "packages/apps/membership-restful"]
+	path = packages/apps/membership-restful
+	url = git@github.com:gennovative/micro-fleet-membership-restful.git
+	branch = development
+[submodule "packages/apps/membership-angular"]
+	path = packages/apps/membership-angular
+	url = git@github.com:gennovative/micro-fleet-membership-angular.git
 [submodule "packages/libs/cache"]
 	path = packages/libs/cache
 	url = git@github.com:gennovative/micro-fleet-cache.git
@@ -14,10 +22,17 @@
 	path = packages/libs/id-generator
 	url = git@github.com:gennovative/micro-fleet-id-generator.git
 	branch = development
+[submodule "packages/libs/generator-package"]
+	path = packages/libs/generator-package
+	url = git@github.com:gennovative/micro-fleet-generator-package.git
+	branch = development
 [submodule "packages/libs/microservice"]
 	path = packages/libs/microservice
 	url = git@github.com:gennovative/micro-fleet-microservice.git
 	branch = development
+[submodule "packages/libs/oauth"]
+	path = packages/libs/oauth
+	url = git@github.com:gennovative/micro-fleet-oauth.git
 [submodule "packages/libs/persistence"]
 	path = packages/libs/persistence
 	url = git@github.com:gennovative/micro-fleet-persistence.git
@@ -30,13 +45,3 @@
 	path = packages/libs/web
 	url = git@github.com:gennovative/micro-fleet-web.git
 	branch = development
-[submodule "packages/libs/oauth"]
-	path = packages/libs/oauth
-	url = git@github.com:gennovative/micro-fleet-oauth.git
-[submodule "packages/apps/membership-restful"]
-	path = packages/apps/membership-restful
-	url = git@github.com:gennovative/micro-fleet-membership-restful.git
-	branch = development
-[submodule "packages/apps/membership-angular"]
-	path = packages/apps/membership-angular
-	url = git@github.com:gennovative/micro-fleet-membership-angular.git
