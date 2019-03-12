@@ -1,0 +1,9 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.renderWhitespace": "boundary",
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false,
+	
+	// Tell Visual Studio Code to use the TypeScript version that we've installed in our node_modules instead of using the global installation of TypeScript.
+	"typescript.tsdk": "./node_modules/typescript/lib"
+}
