@@ -9,6 +9,7 @@
 		"definition": "lerna run definition",
 		"compile": "lerna run compile",
 		"newpkg": "yo ./packages/generator-package/generators/app/index.js",
+		"linkPackages": "node ./scripts/linkPackages.js",
 		"test": "lerna run test",
 		"tslint": "lerna run tslint",
 		"watch": "lerna run watch"
