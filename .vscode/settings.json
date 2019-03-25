@@ -1,0 +1,6 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.renderWhitespace": "boundary",
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": true,
+}
