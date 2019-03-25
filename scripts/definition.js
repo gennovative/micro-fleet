@@ -21,7 +21,8 @@ async function definition() {
 		out: DEF_FILE,
 		sendMessage: console.log,
 		externs: ['./global.d.ts'],
-		exclude: ['test/**/*.*']
+		exclude: ['test/**/*.*'],
+		verbose: false,
 	}
 
 	await fs.remove(DEF_FILE)

@@ -16,11 +16,11 @@
 	},
 	"devDependencies": {
 		"@types/debug": "~0.0.30",
-		"@types/node": "~8.10",
+		"@types/node": "~10.14",
 		"chalk": "~2.4",
 		"fs-extra": "~6.0",
 		"ts-declarator": "~1.0",
-		"typescript": "~2.9"
+		"typescript": "~3.3"
 	},
 	"author": {
 		"name": "gennovative",
