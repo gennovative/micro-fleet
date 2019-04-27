@@ -23,7 +23,7 @@ function linkPackages() {
 		log.info('Ensuring', p)
 		fs.ensureSymlinkSync(from, to)
 	}
-	log.success(`Linked ${packages.length + 1} libs packages linked to root node_module/@micro-fleet`)
+	log.success(`Linked ${packages.length + 1} libs packages to root node_module/@micro-fleet`)
 }
 
 
