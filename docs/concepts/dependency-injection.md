@@ -6,7 +6,7 @@ The code in your [add-ons](./service-add-on.md) may want to use some features fr
 
 ## Dependency Container (DC)
 
-One Dependency Container instance is shared within the whole service. We can access it by 02 ways:
+One Dependency Container instance is shared within the whole service. We can access it by 03 ways:
 
 - Via the protected property `this._depContainer` that your service instance inherits from `MicroServiceBase`.
 
@@ -28,7 +28,22 @@ One Dependency Container instance is shared within the whole service. We can acc
     }
     ```
 
-- Via global singleton `serviceContext`. This way is not recommended, as it will make your code harder to write unit tests. The prefered way is [Automatically-resolved constructor parameter](#automatically-resolved).
+- Via DI, the DC registers itself as a dependency, so you can easily inject it to your class. This is common technique used by service add-on.
+
+    ```typescript
+    import {
+        inject, IDependencyContainer, Types as CmT,
+    } from '@micro-fleet/common'
+
+    export class MyAddOn {
+        constructor(
+            @inject(CmT.DEPENDENCY_CONTAINER) dc: IDependencyContainer,
+        ) {
+        }
+    ```
+
+
+- Via global singleton `serviceContext`. This way is not recommended to use in casual cases except when you encounter really unique situation.
 
     ```typescript
     import { serviceContext as scx } from '@micro-fleet/common'
@@ -234,7 +249,7 @@ Again, it is advisable to read ["inversify"](http://inversify.io/) documentation
 
 ## Resolve hierarchical dependencies chain
 
-As said above, the prefered technique is [automatically-resolved constructor parameter](#automatically-resolved). When you want to resolve a dependency, but it depends on another one which in turn depends on another one. This forms a hierarchical dependencies chain. This situation is so popular when working with DI that all DC supports resolving this kind of chain.
+As said above, the prefered technique is [automatically-resolved constructor parameter](#automatically-resolved). When you want to resolve a dependency, but it depends on another one which in turn depends on another one. This forms a hierarchical dependencies chain. This situation is so popular when working with DI that all DCs support resolving this kind of chain.
 
 ![Diagram for hierarchical dependencies chain](./images/dependency-hierarchy.png "Dependency hierarchy")
 
@@ -242,10 +257,10 @@ Looking at the diagram, we see from the bottom up that `UserRepository` is injec
 
 When the DC is asked to resolve an instance of `UserController`, it must resolve `UserService`, in order to do that, it must resolve `UserRepository`. Moreover, these class may have more dependencies injected to constructor but we just keep it simple in this example.
 
-The whole resolving chain is triggered when you try to resolve `UserController`. The big question is: _"WHO ASKS TO RESOLVE `UserController`?"_.
+The whole resolving chain is triggered from top down when you try to resolve `UserController`. The big question is: _"WHO ASKS TO RESOLVE `UserController`?"_.
 
 Well, to start the automatic chain, we need to manually call `serviceContext.dependencyContainer.resolve(...)`, but we don't let you do it yourself, we do that internally in the Express server add-on and RPC handler add-ons.
 
-In conclusion, you just have to _register the dependencies_ then _ask_ for instances of them. Don't worry about how to resolve them.
+In conclusion, you just have to [_register the dependencies_](#register-dependency) then _ask_ for instances of them with `@inject()` decorator. Don't worry about how to resolve them.
 
 Read the [Service Communication](./service-communication.md) page for more about Express server add-on and RPC handler add-ons.
