@@ -108,7 +108,8 @@ import { Ancestor } from 'external-lib'
 decorate(injectable(), Ancestor)
 
 @injectable()
-export abstract class RepositoryBase {
+export abstract class RepositoryBase
+    extends Ancestor {
     ...
 }
 
@@ -123,13 +124,13 @@ export class UserRepository
 }
 ```
 
-The underlying DI engine is ["inversify"](http://inversify.io/) DI library. You can read its docs about other rules like resolving singleton instance,unmanaged parameters etc.
+The underlying DI engine is ["inversify"](http://inversify.io/) library. You can read its docs about other rules like resolving singleton instance, unmanaged parameters etc.
 
 ## Resolve dependencies
 
 Later in your code, you have many ways to resolve the dependencies:
 
-- Via <a name="automatically-resolved">automatically-resolved constructor parameter</a>, this is the RECOMMENDED way. However the class must be also registered to DC. This topic is covered in depth in a section below:
+- Via <a name="automatically-resolved">automatically-resolved constructor parameter</a>, this is the RECOMMENDED way. However the class must be also registered to DC. This topic is covered in depth in a section [Resolve hierarchical dependencies chain](#resolve-hierarchical-dependencies-chain):
 
     ```typescript
     import { inject, injectable } from '@micro-fleet/common'
@@ -230,3 +231,21 @@ class UserLogic {
 ```
 
 Again, it is advisable to read ["inversify"](http://inversify.io/) documentation to understand the mechanism.
+
+## Resolve hierarchical dependencies chain
+
+As said above, the prefered technique is [automatically-resolved constructor parameter](#automatically-resolved). When you want to resolve a dependency, but it depends on another one which in turn depends on another one. This forms a hierarchical dependencies chain. This situation is so popular when working with DI that all DC supports resolving this kind of chain.
+
+![Diagram for hierarchical dependencies chain](./images/dependency-hierarchy.png "Dependency hierarchy")
+
+Looking at the diagram, we see from the bottom up that `UserRepository` is injected to `UserService`'s constructor. Then `UserService` is injected to `UserController`'s constructor.
+
+When the DC is asked to resolve an instance of `UserController`, it must resolve `UserService`, in order to do that, it must resolve `UserRepository`. Moreover, these class may have more dependencies injected to constructor but we just keep it simple in this example.
+
+The whole resolving chain is triggered when you try to resolve `UserController`. The big question is: _"WHO ASKS TO RESOLVE `UserController`?"_.
+
+Well, to start the automatic chain, we need to manually call `serviceContext.dependencyContainer.resolve(...)`, but we don't let you do it yourself, we do that internally in the Express server add-on and RPC handler add-ons.
+
+In conclusion, you just have to _register the dependencies_ then _ask_ for instances of them. Don't worry about how to resolve them.
+
+Read the [Service Communication](./service-communication.md) page for more about Express server add-on and RPC handler add-ons.

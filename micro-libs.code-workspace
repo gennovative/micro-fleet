@@ -1,0 +1,37 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "packages\\libs\\common"
+		},
+		{
+			"path": "packages\\libs\\common-browser"
+		},
+		{
+			"path": "packages\\libs\\persistence"
+		},
+		{
+			"path": "packages\\libs\\microservice"
+		},
+		{
+			"path": "packages\\libs\\service-communication"
+		},
+		{
+			"path": "packages\\libs\\web"
+		},
+		{
+			"path": "packages\\libs\\oauth"
+		},
+		{
+			"path": "packages\\libs\\cache"
+		},
+		{
+			"path": "packages\\libs\\id-generator"
+		}
+	],
+	"settings": {
+		"typescript.tsdk": "common\\node_modules\\typescript\\lib"
+	}
+}

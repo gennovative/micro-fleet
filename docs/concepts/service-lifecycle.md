@@ -27,7 +27,7 @@ _onError_: An error occured. This event may be invoked by other lifecyle events,
 - Attaching Configuration Provider. However, config settings are not loaded.
 - Invoking `onStarting()` event.
 - If error occurs from any previous steps up to this point, `onError` event is invoked then the process exits.
-- Initializing add-ons. The Configuration Provider is initialized first (it is also an add-on), then it loads all settings. After that all add-ons are initialzed **at the same time**. Therefore it is advisable not to let an add-on rely on another one at this point, but [do it lazily](./dependency-injection#lazily-resolved).
+- Initializing add-ons. The Configuration Provider is initialized first (it is also an add-on), then it loads all settings. After that all add-ons are initialzed **at the same time**. Therefore it is advisable not to let an add-on rely on another one at this point, but [do it lazily](./dependency-injection.md#lazily-resolved).
 - From now on, any error occurence will trigger the stopping flow.
 - Registering handlers for OS-level signals like SIGTERM.
 - Invoking `onStarted()` event.
