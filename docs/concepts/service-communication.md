@@ -6,77 +6,19 @@ Service discovery and communication is a headache in microservice world. Micro F
 
 Micro Fleet supports 03 ways to accept incomming requests: HTTP(S) server, Direct RPC handler, Mediate RPC handler.
 
-In all 03 cases, you must declare controller class that has action methods.
+### **HTTP(S) server for external communication**
 
-### **HTTP(S) Server controller class**
+This should be used for RESTful gateway service accepting HTTP(S) requests from clients like web browser or mobile app. This kind of service belongs to "back-end for front-end (BFF) layer".
 
-```typescript
-import { decorators as d } from '@micro-fleet/web'
+Advantages:
+* Popular protocol (HTTP v1) which is widely supported by various client apps.
+* Easy to implement
 
-@d.controller('users')
-export class UserController {
+Disadvantages:
+* Popular protocol may be stuck with old version for a long time.
+* Hard to upgrade to latest technologies with better security and performance, because they are not widely supported by client apps.
 
-    // GET /users/:id
-    @d.GET(':id')
-    public getOne() {
-        ...
-    }
-
-    // OPTION /users/config
-    @d.action('OPTION','config')
-    public configure() {
-        ...
-    }
-}
-```
-
-### **Direct RPC Handler controller class**
-
-```typescript
-import { decorators as d } from '@micro-fleet/service-communication'
-
-@d.directController()
-export class UserController {
-
-    @d.action()
-    public getOne() {
-        ...
-    }
-
-    @d.action()
-    public getList() {
-        ...
-    }
-}
-```
-
-### **Mediate RPC Handler controller class**
-
-```typescript
-import { decorators as d } from '@micro-fleet/service-communication'
-
-@d.mediateController()
-export class UserController {
-
-    @d.action()
-    public getOne() {
-        ...
-    }
-
-    @d.action()
-    public getList() {
-        ...
-    }
-}
-```
-
-As you see, we manage to make different techniques look similar to one another: a class, controller decorators, action decorators. Now let's inspect some concepts.
-
-## **HTTP(S) server for external communication**
-
-This should be used for RESTful gateway service accepting HTTP(S) requests from clients like web browser or mobile app. This kind of service is also called "back-end for front-end (BFF) layer".
-
-## **Direct internal communication**
+### **Direct internal communication**
 
 This should be used for communication between internal services, where a service connects directly to another one. When the number of services is plenty, it will cause a connection mesh.
 
@@ -91,7 +33,7 @@ Disadvantages:
 * Each source service must have a mechanism to discover the addresses of all target services that it wants to communicate.
 * In case first attempt to send request fails, the source service must have a mechanism to discover the address of an alternative target service and re-send the request to the newly found one. This just repeats if the second target service is down.
 
-## **Mediate communication**
+### **Mediate communication**
 
 This can be used for communication amongst internal services as well as amongst external services and internal ones. To avoid connection mesh, we introduce a message broker that receives a message from a service then delivers the message to one or many other services.
 
@@ -131,7 +73,7 @@ Micro Fleet RPC Caller and RPC Handler have 02 ways to establish connection:
 * _Direct communication_: Currently we use Web API via HTTP v1, but soon will switch to "gRPC" with HTTP v2.
 * _Mediate communication_: Via [RabbitMQ](https://www.rabbitmq.com/) message broker.
 
-## Micro Fleet RPC = RPC + DI
+## **Micro Fleet RPC = RPC + DI**
 
 Previously, we learnt about how RPC works in general. Now we look at how Micro Fleet RPC works with [Dependency Injection](./dependency-injection.md).
 
@@ -164,8 +106,14 @@ Then the service structure would look like this:
 
 In both cases, there is no need to change the code of class `UserController` in _Service A_. All it knows is calling `IUserProvider.getList()` will yield an array of users, or empty array.
 
-### Example of Micro Fleet RPC
+### **Example of Micro Fleet RPC**
 
 * `IdProvider` (package [@micro-fleet/id-generator](https://github.com/gennovative/micro-fleet-id-generator)) will call a remote Id Generator Service if it finds the connection details in configuration. Otherwise it generates IDs locally. The caller never knows the difference.
 
 * `CacheProvider` (package [@micro-fleet/cache](https://github.com/gennovative/micro-fleet-cache)) will read/write data from/to Redis service/cluster if it finds the connection details in configuration. Otherwise it stores data in local memory. The caller never knows the difference.
+
+## **Service discovery**
+
+At the moment, Micro Fleet service is designed to work in Docker container, and deployed in Docker Swarm or Kubernetes which handles service discovery. So there is no prebuilt add-on for this feature.
+
+However you can always create a custom [add-on doing that job](./service-add-on.md#how-do-i-create-add-on-myself).
