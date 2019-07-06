@@ -41,11 +41,11 @@ _onError_: An error occured. This event may be invoked by other lifecyle events,
 Sorry for the wierd and unstandard-looking chart, here is the explanation:
 
 - The stopping flow is triggered either by calling `stop()` method or because the process receives SIGTERM signal from operating system (eg: user presses Ctrl+C).
-- A timer is set with duration defined by MAX_STOP_TIMEOUT settings. Read more about defining service settings in [Service Configuration](./service-configuration.md) page.
-- During the whole flow from now on, if MAX_STOP_TIMEOUT timer is due, the process exits immediately.
+- A timer is set with duration defined by STOP_TIMEOUT settings. Read more about defining service settings in [Service Configuration](./service-configuration.md) page.
+- During the whole flow from now on, if STOP_TIMEOUT timer is due, the process exits immediately.
 - Invoking `onStopping()` event.
 - Sending [dead letters](./dead-letters.md) to all add-ons at the same time, and waiting for them to deal with.
 - Disposing all add-ons at the same time.
 - Invoking `onStopped()` event.
-- If `exitNow` parameter is passed as "true" to method `stop()`, the process exits immediately. Otherwise, waiting for MAX_STOP_TIMEOUT timer.
+- If `exitNow` parameter is passed as "true" to method `stop()`, the process exits immediately. Otherwise, waiting for STOP_TIMEOUT timer.
 - The process exits.

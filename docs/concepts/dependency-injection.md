@@ -2,7 +2,7 @@
 
 Keep in mind that the base service is like a tree trunk, while [add-ons](./service-add-on.md) are tree branches. 
 
-The code in your [add-ons](./service-add-on.md) may want to use some features from other add-ons, and even from the base service. In order to avoid spaghetti connections amongst them, we leverage dependency injection to decouple them.
+The code in your [add-ons](./service-add-on.md) may want to use some features from other add-ons, and even from the service trunk. In order to avoid spaghetti connections amongst them, we leverage dependency injection to decouple them.
 
 ## Dependency Container (DC)
 

@@ -116,4 +116,4 @@ In both cases, there is no need to change the code of class `UserController` in 
 
 At the moment, Micro Fleet service is designed to work in Docker container, and deployed in Docker Swarm or Kubernetes which handles service discovery. So there is no prebuilt add-on for this feature.
 
-However you can always create a custom [add-on doing that job](./service-add-on.md#how-do-i-create-add-on-myself).
+However you can always [create a custom add-on](./service-add-on.md#how-do-i-create-add-on-myself) doing that job.

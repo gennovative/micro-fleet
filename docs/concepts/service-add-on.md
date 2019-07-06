@@ -2,7 +2,7 @@
 
 The class `MicroServiceBase` only offers service lifecycle, your service can start up but can do nothing, neither accepting HTTP requests nor handling message broker messages. "Add-ons" are what bring about the actual functionalities for your service.
 
-Imagine the base service is the trunk of a tree, while add-ons are branches. Features are fruits on branches.
+Imagine the base service is the trunk of a tree (from now on we call it `service trunk`), while add-ons are branches. Features are fruits on branches.
 
 For example, if you want to set up a RESTful service with Express server, you must create an add-on, attach it to service trunk. The add-on is initialized during [starting flow](./service-lifecycle.md#starting-flow). When being initialized, the add-on lifts up an Express server listening to a port and handling incoming requests.
 
@@ -98,13 +98,11 @@ export class MyAddOn implements IServiceAddOn {
 
     If one of them is never settled (resolve or reject), the service waits forever (_Editor note_: This behavior should be improved with a timeout).
 
-* `deadLetter()`: This method is called on all add-ons at the same time after service event `onStopping` (see [Service stopping flow](./service-lifecycle.md#stopping-flow)). This method must return a promise. The service will wait for an amount of time (default 5 seconds, can be configured with name [`ADDONS_DEADLETTER_TIMEOUT`](https://github.com/gennovative/micro-fleet-common/blob/master/src/app/constants/setting-keys/service.ts)) before proceed to call `dispose()`.
+* `deadLetter()`: This method is called on all add-ons at the same time after service event `onStopping` (see [Service stopping flow](./service-lifecycle.md#stopping-flow)). Read more details in its [dedicated page](./dead-letters.md).
 
-    At this phase, the add-on should stop accepting any more incoming requests, but keep working on the in-progress ones. The add-on should also respond in a nice manner to let the client know.
+    At this phase, the add-on should stop accepting any more incoming requests, but keep working on the in-progress ones.
 
-    For example, Web Add-on responds with status code 410 (Gone), while Mediate RPC Handler Add-on simply stops poping message from queue, hopefully the message would be handled by another alive service.
-
-* `dispose()`: This method is called right after all deadletter promises are resolved, or ADDONS_DEADLETTER_TIMEOUT timer is due. This method must return a promise. The service will wait for an amount of time until the [`MAX_STOP_TIMEOUT`](https://github.com/gennovative/micro-fleet-common/blob/master/src/app/constants/setting-keys/service.ts) timer is due (default 10 seconds, counted from the beginning of stopping flow, which means there might be apx. 5 seconds left at the moment).
+* `dispose()`: This method is called right after all deadletter promises are resolved, or DEADLETTER_TIMEOUT timer is due. This method must return a promise. The service will wait for an amount of time until the [`STOP_TIMEOUT`](https://github.com/gennovative/micro-fleet-common/blob/master/src/app/constants/setting-keys/service.ts) timer is due (default 10 seconds, counted from the beginning of stopping flow, which means there might be apx. 5 seconds left at the moment).
 
     At this phase, the add-on should stop all the work and release all occupied resources. Any request attempt from client will result in Not Found error.
 
@@ -119,7 +117,7 @@ class App extends MicroServiceBase {
     /**
      * @override
      */
-    protected onStarting(): void {
+    onStarting(): void {
         super.onStarting()
         this.attachAddOn(new MyAddOn())
     }
@@ -135,7 +133,7 @@ class App extends MicroServiceBase {
     /**
      * @override
      */
-    protected registerDependencies(): void {
+    registerDependencies(): void {
         super.registerDependencies()
         this._depContainer
             .bind(MyAddOn.TYPE, MyAddOn)
@@ -145,7 +143,7 @@ class App extends MicroServiceBase {
     /**
      * @override
      */
-    protected onStarting(): void {
+    onStarting(): void {
         super.onStarting()
 
         const myAddon = this._depContainer.resolve(MyAddOn.TYPE)
