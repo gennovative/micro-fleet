@@ -1,6 +1,6 @@
 # **Service Communication**
 
-Service discovery and communication is a headache in microservice world. Micro Fleet simplifies it for you by providing object-oriented RPC abstraction.
+Service discovery and communication is a headache in microservice world. Micro Fleet prebuilt package `@micro-fleet/service-communication` simplifies it for you by providing object-oriented RPC abstraction.
 
 ## **Accepting incoming requests/messages**
 

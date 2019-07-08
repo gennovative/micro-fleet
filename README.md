@@ -1,6 +1,12 @@
 # Micro Fleet
 
-A Docker-friendly microservice-ready framework to develop enterprise-grade applications (not quick prototype).
+A Docker-friendly microservice-ready framework to develop enterprise-grade NodeJS applications (not for quick prototype).
+
+## How to use
+
+Firstly, grabbing some [concepts](./docs/concepts/README.md) will be helpfull before you jump to code.
+
+Micro Fleet is written in TypeScript, but you can develop with native JavaScript. Our [cookbook] will offer both TypeScript and JavaScript version.
 
 ## Contribute
 

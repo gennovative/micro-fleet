@@ -4,7 +4,7 @@ Your system may have different kinds of services such as RESTful service that ac
 
 ## **Lifecycle events**
 
-[`MicroServiceBase`](https://github.com/gennovative/micro-fleet-microservice/blob/master/src/app/microservice/MicroServiceBase.ts) is an abstract class which should be inherited by all service instances. After its `start()` method is called, it fires up these lifecycle events:
+[`MicroServiceBase`](https://github.com/gennovative/micro-fleet-microservice/blob/master/src/app/microservice/MicroServiceBase.ts) from package `@micro-fleet/microservice` is an abstract class which should be inherited by all service instances. After its `start()` method is called, it fires up these lifecycle events:
 
 _onStarting_: At this point, all [dependencies](./dependency-injection.md) have been registered. This is the right time to attach [add-on](./service-add-on.md) to you service.
 
