@@ -1,18 +1,18 @@
 {
 	"name": "micro-fleet",
-	"version": "1.0.0",
-	"description": "A Docker-friendly microservice-ready framework to develop enterprise-grade applications (not quick prototype).",
+	"version": "2.3.0-rc1",
+	"description": "Spin up your fleet of containerized microservices with the power of TypeScript.",
 	"scripts": {
-		"build": "lerna run build",
 		"clean": "lerna run clean",
+		"lint": "lerna run lint",
+		"compile": "lerna run compile",
+		"test": "lerna run test",
 		"dedup": "lerna run dedup",
 		"definition": "lerna run definition",
-		"compile": "lerna run compile",
 		"newpkg": "yo ./packages/generator-package/generators/app/index.js",
 		"linkPackages": "node ./scripts/linkPackages.js",
-		"test": "lerna run test",
-		"tslint": "lerna run tslint",
-		"watch": "lerna run watch"
+		"installPackages": "lerna bootstrap",
+		"postinstall": "npm run linkPackages"
 	},
 	"devDependencies": {
 		"@types/debug": "~0.0.30",

@@ -9,7 +9,7 @@ const log = require('./common')
 /**
  * Create TypeScript definition file (.d.ts) for a package.
  */
-async function definition() {
+async function definition(transformFn = (content) => content) {
 	log.bold('> definition.js')
 
 	const CWD = process.cwd()
@@ -17,6 +17,7 @@ async function definition() {
 	const DEF_FILE = path.join(CWD, 'typings', 'app.d.ts')
 	const config = {
 		name: `${PKG.name}/dist`,
+		indent: '    ',
 		project: CWD,
 		out: DEF_FILE,
 		sendMessage: console.log,
@@ -30,9 +31,9 @@ async function definition() {
 
 	const content = await fs.readFile(DEF_FILE, 'utf8')
 
-	const newContent = content.replace(/([\t\f\v]*)private(.*)[\r\n]*/g, '')
+	const newContent = transformFn(content.replace(/([\t\f\v]*)private(.*)[\r\n]*/g, '')
 		.replace(/\/src\//g, '/dist/')
-		.replace(/\/dist\/app\/index'/g, "'")
+		.replace(/\/dist\/app\/index'/g, "'"))
 
 	await fs.writeFile(DEF_FILE, newContent)
 	log.success('Definition generated')
