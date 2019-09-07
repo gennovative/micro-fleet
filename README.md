@@ -1,6 +1,17 @@
-MicroFleet — A container-friendly microservice framework written in TypeScript.
+MicroFleet — Spin up your fleet of containerized microservices with the power of TypeScript
 ====
-Lets you develop a microservice system using transferable knowledge (such as Dependency Injection, RPC, ORM, DTO, Model auto mapping, Repository pattern, Domain-driven design etc.), because we know that services in a microservice system can be written in different languages (C#, Java, Golang...).
+
+## Why another NodeJS framework?
+
+System with microservice architecture may have heterogeneous technology stacks and different programming languages, therefore it will be very helpful if the services are developed with popular, standarized and transferable knowledge that developers can apply to various technology.
+
+* **Dependency Injection**: for decoupling and unit testing. Dependencies in MicroFleet are automatically resolved.
+* **Remote procedure call (RPC)**: Very crucial for service communication. You will love our RPC utilities.
+* **Object-relation mapping (ORM)**: Optional, but if you need, we have it.
+* **Model auto mapping**: Our utility class can help you avoid boilerplate when translating DTO model <=> Domain model <=> ORM model.
+* **Repository pattern**: We provide a repository class with common CRUD operations (count, create, findById, page, delete etc.), all of them support atomic transaction.
+* **Domain-driven design**: MicroFleet is not strictly opinionate, you can use and patterns (MVC, Anemic, Domain-driven design...)
+
 
 Various architectures
 ----
@@ -11,24 +22,24 @@ MicroFleet doesn't enforce any architecture design, here are just some examples:
 
 ![All-RESTful architecture](./docs/concepts/images/microservice-architecture-1.png "All-RESTful architecture")
 
-A lot of you may be familiar with this architecture, especially those who are new to microservice. In this architecture, all services are RESTful, accept requests from clients, and communicate via HTTP calls.
+A lot of you may be familiar with this architecture, especially those who are new to microservice. In this architecture, all services are RESTful, accepting requests from clients or other services, and communicating with one another via HTTP calls.
 
 
 ## Backend-for-frontend (BFF) services and Domain services
 
 ![Backend-for-frontend (BFF) services and Domain services](./docs/concepts/images/microservice-architecture-2.png "Backend-for-frontend (BFF) services and Domain services")
 
-Another popular architecture, we have REST service accepting clients' requests and passing them to message queue / message broker. Internal domain services pick queued requests to process then send reponses back to message broker for the caller REST service to receive and respond to client.
+Another popular architecture, here we have REST services accepting clients' requests and passing them to message queue / message broker. Internal domain services pick queued requests to process then send reponses back to message broker for the caller REST service to receive and respond to client.
 
 Notice that we also have direct communication between services, in addition to mediate communication via message broker.
 
-For the sake of brevity, we don't mention any more architectures here. You can always create an issue if you have problem with applying MicroFleet.
+For the sake of brevity, we don't mention any more architectures here. We believe you can implement any architecture with MicroFleet. Should you bump into any problems, don't forget our [issue page](https://github.com/gennovative/micro-fleet/issues).
 
 Similar code interfaces
 ----
 Building various architectures with similar code interfaces.
 
-Regardless you are developing RESTful service, domain service, or batch processing, monitoring, logging service... MicroFleet helps keeping the way you code mostly the same. Let's have a look:
+Regardless you are developing RESTful service, domain service, or batch processing, monitoring, logging service... MicroFleet keeps the way you code mostly the same. Let's have a look:
 
 ### RESTful service's controller
 

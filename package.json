@@ -1,7 +1,7 @@
 {
 	"name": "micro-fleet",
-	"version": "1.0.0",
-	"description": "A Docker-friendly microservice-ready framework to develop enterprise-grade applications (not quick prototype).",
+	"version": "2.3.0-rc1",
+	"description": "Spin up your fleet of containerized microservices with the power of TypeScript.",
 	"scripts": {
 		"clean": "lerna run clean",
 		"lint": "lerna run lint",

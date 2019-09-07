@@ -45,3 +45,7 @@
 	path = packages/libs/web
 	url = git@github.com:gennovative/micro-fleet-web.git
 	branch = development
+[submodule "packages/libs/common-browser"]
+	path = packages/libs/common-browser
+	url = git@github.com:gennovative/micro-fleet-common-browser.git
+	branch = development

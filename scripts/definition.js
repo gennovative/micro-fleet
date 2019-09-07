@@ -17,6 +17,7 @@ async function definition(transformFn = (content) => content) {
 	const DEF_FILE = path.join(CWD, 'typings', 'app.d.ts')
 	const config = {
 		name: `${PKG.name}/dist`,
+		indent: '    ',
 		project: CWD,
 		out: DEF_FILE,
 		sendMessage: console.log,
