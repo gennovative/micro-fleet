@@ -1,6 +1,6 @@
 {
 	"name": "micro-fleet",
-	"version": "2.3.0-rc1",
+	"version": "2.3.0-rc3",
 	"description": "Spin up your fleet of containerized microservices with the power of TypeScript.",
 	"scripts": {
 		"clean": "lerna run clean",
@@ -12,15 +12,16 @@
 		"newpkg": "yo ./packages/generator-package/generators/app/index.js",
 		"linkPackages": "node ./scripts/linkPackages.js",
 		"installPackages": "lerna bootstrap",
+		"preinstall": "rimraf node_modules/@micro-fleet",
 		"postinstall": "npm run linkPackages"
 	},
 	"devDependencies": {
-		"@types/debug": "~0.0.30",
-		"@types/node": "~10.14",
+		"@types/node": "^10.14.17",
 		"chalk": "~2.4",
-		"fs-extra": "~6.0",
-		"ts-declarator": "~1.0",
-		"typescript": "~3.3"
+		"fs-extra": "~8.1",
+		"rimraf": "~3.0",
+		"ts-declarator": "^1.0.1",
+		"typescript": "~3.6"
 	},
 	"author": {
 		"name": "gennovative",

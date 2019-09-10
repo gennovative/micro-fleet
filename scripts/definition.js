@@ -43,5 +43,7 @@ async function definition(transformFn = (content) => content) {
 if (module.parent) {
 	module.exports = definition
 } else { // If executed from terminal
-	definition()
+	(async () => {
+		await definition()
+	})()
 }

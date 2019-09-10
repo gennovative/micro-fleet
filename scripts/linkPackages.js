@@ -10,7 +10,7 @@ function linkPackages() {
 	log.bold('> linkPackages.js')
 
 	const cwd = __dirname
-	const targetDir = path.resolve(cwd, '../node_modules/@micro-fleet')
+	const targetDir = path.resolve(cwd, '../packages/node_modules/@micro-fleet')
 	fs.ensureDirSync(targetDir)
 	
 	const packageDir = path.resolve(cwd, '../packages/libs')
