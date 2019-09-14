@@ -11,9 +11,7 @@
 		"definition": "lerna run definition",
 		"newpkg": "yo ./packages/generator-package/generators/app/index.js",
 		"linkPackages": "node ./scripts/linkPackages.js",
-		"installPackages": "lerna bootstrap",
-		"preinstall": "rimraf node_modules/@micro-fleet",
-		"postinstall": "npm run linkPackages"
+		"postinstall": "lerna bootstrap --concurrency=2"
 	},
 	"devDependencies": {
 		"@types/node": "^10.14.17",
