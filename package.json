@@ -1,6 +1,6 @@
 {
 	"name": "micro-fleet",
-	"version": "2.3.0-rc3",
+	"version": "2.4.0",
 	"description": "Spin up your fleet of containerized microservices with the power of TypeScript.",
 	"scripts": {
 		"clean": "lerna run clean",
