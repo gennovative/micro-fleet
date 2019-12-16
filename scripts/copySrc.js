@@ -1,4 +1,4 @@
-const fs = require('fs')
+// const fs = require('fs')
 const fse = require('fs-extra')
 const path = require('path')
 
@@ -20,18 +20,26 @@ async function copySrc(pairs = [], verbose = true) {
 
 	pairs.forEach((p) => {
 		if (p.transformFn) {
-			fse.removeSync(p.to)
-			if (fs.lstatSync(p.from).isDirectory()) {
-				fse.ensureDirSync(p.to)
-				fse.readdirSync(p.from).forEach(subPath => copySrc([{
-					from: path.join(p.from, subPath),
-					to: path.join(p.to, subPath),
-					transformFn: p.transformFn,
-				}], false))
-				return
+			try {
+				fse.removeSync(p.to)
 			}
-			const content = fse.readFileSync(p.from, { encoding: 'utf8' })
-			fse.writeFileSync(p.to, p.transformFn(content), { encoding: 'utf8' })
+			catch {
+				// Dun care
+			}
+			finally {
+				if (fse.lstatSync(p.from).isDirectory()) {
+					fse.ensureDirSync(p.to)
+					fse.readdirSync(p.from).forEach(subPath => copySrc([{
+						from: path.join(p.from, subPath),
+						to: path.join(p.to, subPath),
+						transformFn: p.transformFn,
+					}], false))
+					return
+				}
+				fse.ensureDirSync(path.dirname(p.to))
+				const content = fse.readFileSync(p.from, { encoding: 'utf8' })
+				fse.writeFileSync(p.to, p.transformFn(content), { encoding: 'utf8' })
+			}
 		}
 		else {
 			fse.copySync(p.from, p.to, { overwrite: true,  })
