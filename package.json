@@ -14,12 +14,12 @@
 		"postinstall": "lerna bootstrap --concurrency=2"
 	},
 	"devDependencies": {
-		"@types/node": "^10.14.17",
+		"@types/node": "^12",
 		"chalk": "~2.4",
 		"fs-extra": "~8.1",
-		"lerna": "=3.16.4",
+		"lerna": "^3.22.1",
 		"rimraf": "~3.0",
-		"ts-declarator": "^1.0.1",
+		"ts-declarator": "~1.0",
 		"typescript": "~3.6"
 	},
 	"author": {
