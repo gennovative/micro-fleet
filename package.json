@@ -17,7 +17,7 @@
 		"@types/node": "^12",
 		"chalk": "~2.4",
 		"fs-extra": "~8.1",
-		"lerna": "^3.22.1",
+		"lerna": "^6.4.0",
 		"rimraf": "~3.0",
 		"ts-declarator": "~1.0",
 		"typescript": "~3.6"
